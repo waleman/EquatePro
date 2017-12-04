@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,MenuController,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,MenuController,AlertController,ViewController } from 'ionic-angular';
 
 //paginas
 import { GestionvisitasPage } from '../gestionvisitas/gestionvisitas'
+
+//modal
+import { ModalRazonesNofacturaPage } from '../modal-razones-nofactura/modal-razones-nofactura'
+import { ModalRazonesNovisitaPage } from '../modal-razones-novisita/modal-razones-novisita'
 
 //contorladores
 import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ToastController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -20,21 +26,27 @@ export class VisitaPage {
     public nombre:any;
     public numero:any;
     public estado:any;
+
+
     public razon:any;
+    public razonNombre: any;
+
     public nofactura:any;
-    public ListaNoVisita:any;
-    public ListaNoFactura:any;
+ 
+
     public Razonnofactura:any;
+    public RazonnofacturaNombre: any;
+
     public nota:any;
     public Lat:any;
     public Long:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public menuCtrl:MenuController,public storageCrtl:Storage,private geoCtrl: Geolocation,public toastCtrl:ToastController,public alertCtrl:AlertController) {
+  constructor(public viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public storageCrtl: Storage, private geoCtrl: Geolocation, public toastCtrl: ToastController, public alertCtrl: AlertController, public modalCtrl: ModalController) {
      this.id =this.navParams.get('cid');
      this.nombre = this.navParams.get('cnombre');
      this.numero = this.navParams.get('numero');
-     this.OpcNoVisita();
-     this.OptionNoFactura();
+    
+ 
      this.Coordenadas();
 
   }
@@ -47,33 +59,9 @@ export class VisitaPage {
     this.menuCtrl.open();
   }
 
-  //seleccionar las  opciones de no visita
-  OpcNoVisita(){
-        this.storageCrtl.ready().then(()=>{
-                  this.storageCrtl.get("noVisita").then(data=>{
-                       if(data){
-                          this.ListaNoVisita =data;
-                       }else{
-                            //Mostrar
-                            // error  con los datos de no visita por que no fueron descargados en el login
-                       }
-                  });
-        });
-  }
+ 
 
-  // seleccionar las opciones de no factura
-  OptionNoFactura(){
-     this.storageCrtl.ready().then(()=>{
-          this.storageCrtl.get("noFactura").then(data=>{
-                if(data){
-                     this.ListaNoFactura = data;
-                }else{
-                    //mostrar
-                    // error con los datos de no factura por que no fueron descargados en el login
-                }
-          });
-     });
-  }
+
 
 
 
@@ -118,7 +106,7 @@ MostarToast(MensajeError:any){
                       }
                   }
            }else{//no visitara
-              if(!this.razon){ // si no selecciono una opvion de no vita
+              if(!this.razon){ // si no selecciono una opcion de no vita
                 let error = "Para continuar. Seleccione el motivo por el cual no visitara a cliente";
                 this.MostarToast(error);
               }else{
@@ -186,6 +174,33 @@ MostarToast(MensajeError:any){
          }).catch((error) => {
            // Error  al conseguir de coordenadas
          });
+  }
+
+
+
+
+  Buscar_razon_no_factura(){
+
+    let modal = this.modalCtrl.create(ModalRazonesNofacturaPage)
+
+
+    modal.onDidDismiss(data => {
+      this.Razonnofactura = data["razonId"];
+      this.RazonnofacturaNombre = data["descripcion"];
+    });
+    modal.present();
+
+  }
+
+  Buscar_razon_no_visita() {
+    let modal = this.modalCtrl.create(ModalRazonesNovisitaPage)
+
+    modal.onDidDismiss(data => {
+      this.razon = data["razonId"];
+      this.razonNombre = data["descripcion"];
+    });
+
+    modal.present();
   }
 
 

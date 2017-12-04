@@ -51,15 +51,13 @@
 
                       <!-- preguntar por que no visito el cliente -->
                  
-                            <ion-item   > 
+                            <ion-item  (click)="Buscar_razon_no_visita()"  > 
                               <ion-label>Por que no visitara?</ion-label>
-                            
-                              <ion-select name="razon" [(ngModel)]="razon">
-                                  <div *ngFor="let ra of ListaNoVisita">
-                                  <ion-option value="{{ ra.razonId}}">{{ ra.descripcion }}</ion-option>
-                                </div>
-                                </ion-select>       
+                              <ion-icon color="primary" name="arrow-forward" item-end></ion-icon>
+                            </ion-item>
 
+                            <ion-item>
+                                <ion-label color="primary">Razon : {{ razonNombre }}</ion-label>
                             </ion-item>
          </ion-card>                    
 
@@ -87,15 +85,14 @@
                       <!-- preguntar  razon de no factura-->
 
         <ion-card padding  *ngIf="nofactura == 'no' && estado == 'si' ">           
-                        <ion-item    > 
+                        <ion-item   (click)="Buscar_razon_no_factura()"  > 
                             <ion-label>Razon por la cual no tomara pedido?</ion-label>
-                          
-                            <ion-select name="Razonnofactura" [(ngModel)]="Razonnofactura">
-                                <div *ngFor="let ra of ListaNoFactura">
-                                <ion-option value="{{ra.razonId}}">{{ ra.descripcion }}</ion-option>
-                              </div>
-                              </ion-select>       
+                            <ion-icon color="primary" name="arrow-forward" item-end></ion-icon>
                           </ion-item>
+                     
+                            <ion-item>
+                                <ion-label color="primary">Razon : {{ RazonnofacturaNombre }}</ion-label>
+                            </ion-item>
  
          </ion-card>   
          <ion-card padding>

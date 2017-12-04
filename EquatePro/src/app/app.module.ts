@@ -12,13 +12,16 @@ import { LoginPage } from '../pages/login/login';
 
 import { SincronizarPage } from '../pages/sincronizar/sincronizar';
 
-
+//paginas
 import { GestionvisitasPage } from '../pages/gestionvisitas/gestionvisitas';
 import { ClientesvisitadosPage } from '../pages/clientesvisitados/clientesvisitados';
 import { ClientesnovisitadosPage } from '../pages/clientesnovisitados/clientesnovisitados';
 import { ClientespospuestosPage } from '../pages/clientespospuestos/clientespospuestos';
 import { MenuvisitasPage } from '../pages/menuvisitas/menuvisitas';
 import { VisitaPage } from '../pages/visita/visita';
+//modals
+import { ModalRazonesNofacturaPage } from '../pages/modal-razones-nofactura/modal-razones-nofactura'
+import { ModalRazonesNovisitaPage } from '../pages/modal-razones-novisita/modal-razones-novisita'
 //providers
 import { ConexionProvider } from '../providers/conexion/conexion';
 import { UtilidadesProvider } from '../providers/utilidades/utilidades';
@@ -38,7 +41,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     ClientesnovisitadosPage,
     ClientespospuestosPage,
     GestionvisitasPage,
-    VisitaPage
+    VisitaPage, ModalRazonesNofacturaPage, ModalRazonesNovisitaPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     ClientesnovisitadosPage,
     ClientespospuestosPage,
     GestionvisitasPage,
-    VisitaPage
+    VisitaPage, ModalRazonesNovisitaPage, ModalRazonesNofacturaPage
   ],
   providers: [
     StatusBar,
