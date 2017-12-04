@@ -1,0 +1,115 @@
+<ion-header>
+    <ion-navbar color="primary" hideBackButton>.
+            <button ion-button (click)="showMenu()">
+                    <ion-icon name="menu"></ion-icon>
+           </button> 
+                  <ion-title text-center>
+                    Nueva visita
+                  </ion-title>
+                 
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+ 
+     <ion-list>
+           <ion-card>
+                    <ion-grid>
+                            <ion-row>
+                              <ion-col col-3>
+                                    <ion-label color="primary" stacked >Codigo</ion-label>
+                                    <ion-input type="text"  name="id" [(ngModel)]="id" readonly></ion-input>
+                              </ion-col>
+                              <ion-col col-9>
+                                    <ion-label  color="primary" stacked >Cliente</ion-label>
+                                    <ion-input type="text" name="nombre" [(ngModel)]="nombre" readonly></ion-input>
+                              </ion-col>
+                            </ion-row>
+                    </ion-grid>
+                   
+          </ion-card>    
+          <ion-card padding>           
+                     <!--Preguntar si Visitara al cliente-->
+                    <ion-label  >Visitara este cliente?</ion-label>
+                    <div  style="display:block" >   
+                        <ion-list radio-group  name="Estado" [(ngModel)]="estado" required>
+                            <ion-item >
+                                <ion-label  color="dark">Si</ion-label>
+                                <ion-radio value="si" ></ion-radio>
+                            </ion-item>
+                              <ion-item  >
+                                <ion-label  color="dark">No</ion-label>
+                                <ion-radio value="no" ></ion-radio>
+                              </ion-item>
+                         </ion-list>
+                    </div>
+         </ion-card>     
+         <ion-card padding *ngIf="estado == 'no'">  
+
+                      <!-- preguntar por que no visito el cliente -->
+                 
+                            <ion-item   > 
+                              <ion-label>Por que no visitara?</ion-label>
+                            
+                              <ion-select name="razon" [(ngModel)]="razon">
+                                  <div *ngFor="let ra of ListaNoVisita">
+                                  <ion-option value="{{ ra.razonId}}">{{ ra.descripcion }}</ion-option>
+                                </div>
+                                </ion-select>       
+
+                            </ion-item>
+         </ion-card>                    
+
+         <ion-card padding  *ngIf="estado == 'si'">
+                      <!-- preguntar si facturara -->
+
+                      <div   >
+                          <ion-label  >Tomara pedido para este cliente ?</ion-label>
+                          <div  style="display:block" >   
+                              <ion-list radio-group  name="nofactura" [(ngModel)]="nofactura" required>
+                                  <ion-item >
+                                      <ion-label  color="dark">Si</ion-label>
+                                      <ion-radio value="si" ></ion-radio>
+                                    </ion-item>
+                                  
+                                    <ion-item  >
+                                      <ion-label  color="dark">No</ion-label>
+                                      <ion-radio value="no" ></ion-radio>
+                                    </ion-item>
+        
+                              </ion-list>
+                          </div>
+                     </div>
+        </ion-card>              
+                      <!-- preguntar  razon de no factura-->
+
+        <ion-card padding  *ngIf="nofactura == 'no' && estado == 'si' ">           
+                        <ion-item    > 
+                            <ion-label>Razon por la cual no tomara pedido?</ion-label>
+                          
+                            <ion-select name="Razonnofactura" [(ngModel)]="Razonnofactura">
+                                <div *ngFor="let ra of ListaNoFactura">
+                                <ion-option value="{{ra.razonId}}">{{ ra.descripcion }}</ion-option>
+                              </div>
+                              </ion-select>       
+                          </ion-item>
+ 
+         </ion-card>   
+         <ion-card padding>
+                     <ion-item>
+                         <ion-label color="primary" stacked>Notas</ion-label>
+                        <ion-textarea  name="nota" [(ngModel)]="nota"></ion-textarea>
+                      </ion-item>
+        </ion-card>      
+        </ion-list>
+                  
+       <div padding>
+          <button color="secondary"  ion-button full (click)=" GuardarlosCambios()">Continuar</button>
+          <br>
+          <button color="danger"  (click)="cancelar()" ion-button full>Cancelar</button>
+       </div>
+     
+</ion-content>

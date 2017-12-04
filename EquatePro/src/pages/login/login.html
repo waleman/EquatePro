@@ -1,0 +1,82 @@
+
+
+
+<ion-content class="background">
+ <!--
+  <ion-card>
+        <ion-card-header>
+          PIN del Vendedor
+        </ion-card-header>
+
+      <ion-card-content>
+
+        <ion-list no-line>
+        
+          <ion-item class="arreglar">
+            <ion-input type="number" max="1" placeholder="0" name="n1" [(ngModel)]="n1" ></ion-input>
+            <ion-input type="number" max="1" placeholder="0" name="n2" [(ngModel)]="n2" ></ion-input>
+            <ion-input type="number" max="1" placeholder="0" name="n3" [(ngModel)]="n3" ></ion-input>
+            <ion-input type="number" max="1" placeholder="0" name="n4" [(ngModel)]="n4" ></ion-input>
+          </ion-item>
+
+          <button ion-button block  color="primary" (click)="Login()">Log in</button>
+        
+          
+         
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  -->
+
+  <div id="pincode">
+      <div class="table">
+        <div class="cell">
+  
+       
+  
+          <div id="fields">
+              <ion-grid>
+                  <ion-row>
+                    <div  col-3 class="numberfield" id="primero"><span></span></div>
+                    <div  col-3 class="numberfield" id="segundo"><span></span></div>
+                    <div  col-3 class="numberfield" id="tercero"><span></span></div>
+                    <div  col-3 class="numberfield" id="cuarto" ><span></span></div>
+               </ion-row>
+            </ion-grid>
+          </div>
+  
+          <div id="numbers">
+              <ion-grid>
+                  <ion-row>
+                      <div col-4><button ion-button (click)="numero(1)" >1</button></div>
+                      <div col-4><button ion-button (click)="numero(2)" >2</button></div>
+                      <div col-4><button ion-button (click)="numero(3)" >3</button></div>
+                  </ion-row>
+                  <ion-row>
+                      <div col-4><button ion-button (click)="numero(4)" >4</button></div>
+                      <div col-4><button ion-button (click)="numero(5)" >5</button></div>
+                      <div col-4><button ion-button (click)="numero(6)" >6</button></div>
+                  </ion-row>
+                  <ion-row>
+                      <div col-4><button ion-button (click)="numero(7)" >7</button></div>
+                      <div col-4><button ion-button (click)="numero(8)" >8</button></div>
+                      <div col-4><button ion-button (click)="numero(9)" >9</button></div>
+                  </ion-row>
+         
+                  <ion-row>
+                      <div col-4></div>
+                      <div col-4><button ion-button (click)="numero(0)" >0</button></div>
+                      <div col-4><button ion-button (click)="borrar()" ><ion-icon name="backspace"></ion-icon></button></div>
+                  </ion-row>
+  
+             
+  
+            </ion-grid>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+ 
+    
+  </ion-content>

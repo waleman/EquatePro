@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-navbar color="primary" hideBackButton>.
+            <button ion-button (click)="showMenu()">
+                    <ion-icon name="menu"></ion-icon>
+           </button> 
+                  <ion-title text-center>
+                    Gestion de visitas
+                  </ion-title>
+                  <ion-searchbar  (ionInput)="getItems($event)"  placeholder="Buscar un cliente" showCancelButton="true" animated="true" >
+                  </ion-searchbar>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+  
+
+
+      <ion-list [virtualScroll]="lista">
+        <button ion-item  name="listavisitas"  *virtualItem="let visitas; let i = index;" (click)="Enviar(visitas.clienteId,visitas.nombre,i+1)" [hidden]="visitas.estado != 'Inicial'">        
+                        <h2>{{ i+1 }} - {{ visitas.nombre }} </h2>
+                        <p>Codigo de cliente : {{visitas.clienteId}} </p>
+                        <ion-icon color="primary" name="arrow-dropright" item-end></ion-icon>
+        </button>
+      </ion-list>
+
+
+
+    <br><br><br>
+
+</ion-content>
+
+
+<ion-fab left bottom class="alinear">
+    <button ion-fab color="danger" (click)="Salir()">
+      <ion-icon name="arrow-back"></ion-icon></button>
+   
+  </ion-fab>

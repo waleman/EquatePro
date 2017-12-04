@@ -1,0 +1,97 @@
+   
+<ion-header>
+        <ion-navbar color="primary" hideBackButton>
+            <!--
+                <button ion-button (click)="showMenu()">
+                        <ion-icon name="menu"></ion-icon>
+               </button>  
+            -->
+                      <ion-title text-center>
+                        Menu Principal
+                      </ion-title>
+        </ion-navbar>
+
+ </ion-header>
+
+<ion-content >
+    <br>
+  <div class="center">
+      <p class=" complemento">Hoy</p>
+      <p class="dia unrenglon">{{ dia }}</p>
+  </div>
+ <ion-card>
+<ion-item (click)="irMenuVisitas()">
+          <ion-icon name="walk"  item-start></ion-icon>
+          <h2>Visitas </h2>
+          <p>Ir al menu de visitas</p>
+          <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+         </ion-item>
+ </ion-card>
+ <ion-card>
+  
+        <ion-item >    
+         <ion-icon name="cart"  item-start></ion-icon>
+        <h2>Pedidos</h2>
+        <p>Ver pedidos realizados</p>
+        
+                <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+     
+       </ion-item>
+ </ion-card>
+<ion-card>
+    <ion-item (click)="irSincronizar()">
+        <ion-icon name="cloud" item-start></ion-icon>
+        <h2>Sincronizar</h2>
+        <p>Sincronizar los datos que ah trabajado</p>
+
+        <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+
+    </ion-item>
+</ion-card>
+ <ion-card>
+        <ion-item (click)="Salir()">    
+         <ion-icon name="power"  item-start></ion-icon>
+        <h2>Salir</h2>
+        <p>Salir de la aplicación</p>
+        
+                <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+     
+       </ion-item>
+ </ion-card>
+
+
+     
+  <br><br><br><br><br><br><br>
+
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<ion-fab bottom left padding padding>
+    <button ion-fab color="secundary" (click)="irPedidos()">
+        <ion-icon name="cart"></ion-icon>
+    </button>
+</ion-fab>
+<ion-fab bottom right padding padding>
+    <button ion-fab color="dark" (click)="irSincronizar()">
+        <ion-icon name="cloud"></ion-icon>
+    </button>
+</ion-fab>
+-->

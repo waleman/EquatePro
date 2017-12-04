@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-navbar color="primary" hideBackButton>
+
+            <button ion-button (click)="showMenu()">
+                    <ion-icon name="menu"></ion-icon>
+           </button> 
+
+                  <ion-title text-center>
+                    Menu visitas
+                  </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content >
+    <ion-card>
+        <ion-item (click)="irGestion()" >
+          <ion-icon name="contacts"  item-start></ion-icon>
+          <h2>Nueva visita</h2>
+          <p>Visitar un cliente de la lista</p>
+          <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+        </ion-item>
+   </ion-card>
+    <ion-card>
+        <ion-item (click)="irVisitas()" >
+          <ion-icon name="body"  item-start></ion-icon>
+          
+          <h2>Lista de clientes visitados</h2>
+          <p>Podra ver todos los clientes que visito en el dia</p>
+          <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+        </ion-item>
+   </ion-card>
+ <ion-card>
+    <ion-item (click)="irNoVisitas()" >
+        <ion-icon name="alert"  item-start></ion-icon>
+      <h2>Lista de clientes no visitados</h2>
+      <p>Podra ver los clientes que no visito en el dia</p>
+      <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+    </ion-item>
+</ion-card>
+<ion-card>
+    <ion-item  (click)="irPospuestas()" >
+   
+        <ion-icon name="timer"  item-start></ion-icon>
+      
+      <h2>Visitas pospuestas</h2>
+      <p>Sistema de encuestas</p>
+      <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+    </ion-item>
+</ion-card>
+
+</ion-content>
+
+
+<ion-fab bottom left  >
+    <button ion-fab color="danger" (click)="Regresar()">
+        <ion-icon name="arrow-back"></ion-icon>
+    </button>
+</ion-fab>

@@ -1,0 +1,161 @@
+page-login {
+
+
+	/*
+	.arreglar{
+		display: inline;
+	}
+
+    .background {
+		background-image: url('../assets/ventas.jpg');
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center; 
+	}
+
+	.scroll-content {
+		align-content: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+
+	ion-card.card {
+		box-shadow: none;
+		background: rgba(0, 0, 0, 0.5);
+		border-radius: 5px;
+	}
+
+	a, p,
+	ion-card-header.card-header {
+		color: #fff!important;
+	}
+
+	.list > .item-block:first-child {
+		border: medium none;
+	}
+
+	.item {
+		margin-bottom: 10px;
+		
+		background: rgba(255, 255, 255, 0.1);
+		border: medium none;
+
+		.text-input, {
+			text-align: center;
+			padding: 5px;
+			background: rgb(225, 221, 219);
+			
+		}
+
+		input::-moz-placeholder  {
+			background: rgb(225, 221, 219);
+		}
+
+		input:-moz-placeholder {
+			background: rgb(225, 221, 219);
+		}
+
+		*::-webkit-input-placeholder  {
+			background: rgb(225, 221, 219);
+		}
+
+		*:-ms-input-placeholder  {
+			background: rgb(225, 221, 219);
+		}
+
+		*:-moz-placeholder  {
+			background: rgba(255, 255, 255, 0.5);
+		}
+	}
+
+	.icon {
+		padding-right: 10px;
+	}
+
+	.bottom {
+		position: absolute;
+		bottom: 0;
+	}*/
+
+
+    .background {
+		background-image: url('../assets/ventas.jpg');
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center; 
+	}
+
+	  
+	  #numbers {
+		max-width: 300px;
+		padding: 0 20px;
+		margin: 0 auto;
+		position: relative;
+		display: block;
+		-webkit-transition: all 1s ease-out;
+		-moz-transition: all 1s ease-out;
+		transition: all 1s ease-out;
+		opacity: 1;
+	  }
+	  
+	  #numbers.hide {
+		opacity: 0.3;
+	  }
+	  
+	  #pincode button {
+		width: 70px;
+		height: 70px;
+		margin-bottom: 10px;
+		background-color: rgba(0, 0, 0, 0.35);
+		border: 0;
+		color: #fff;
+		font-size: 25px;
+		line-height: 50px;
+		border-radius: 100%;
+		opacity: 1;
+		outline: 0;
+		border: 2px solid #272a2f;
+	  }
+	  
+	  #pincode button:active {
+		background-color: rgba(0, 0, 0, 0.6);
+		outline: 0;
+	  }
+	  
+	  #fields {
+		max-width: 200px;
+		padding: 0 20px;
+		margin: 50px auto;
+		position: relative;
+		display: block;
+	  }
+	  
+	  #fields .numberfield {
+		text-align: center;
+	  }
+	  
+	  #fields .numberfield span {
+		height: 10px;
+		width: 10px;
+		border: 2px solid #fff;
+		background-color: transparent;
+		border-radius: 100%;
+		position: relative;
+		display: inline-block;
+		text-align: center;
+	  }
+	  
+	  #fields .numberfield.active span {
+		background-color: #fff;
+	  }
+	  
+	  #fields .numberfield.right span {
+		background-color: #272a2f;
+		border-color: #272a2f;
+		transition: all .5s ease-in-out;
+		-webkit-transition: all .5s ease-in-out;
+	  }
+
+}
