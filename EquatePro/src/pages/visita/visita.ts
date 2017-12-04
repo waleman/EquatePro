@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,MenuController,AlertController,ViewController } from 'ionic-angular';
 
 //paginas
-import { GestionvisitasPage } from '../gestionvisitas/gestionvisitas'
+import { GestionvisitasPage } from '../gestionvisitas/gestionvisitas';
+import { NuevopedidoPage } from '../nuevopedido/nuevopedido';
 
 //modal
 import { ModalRazonesNofacturaPage } from '../modal-razones-nofactura/modal-razones-nofactura'
 import { ModalRazonesNovisitaPage } from '../modal-razones-novisita/modal-razones-novisita'
+
 
 //contorladores
 import { Storage } from '@ionic/storage';
@@ -70,6 +72,12 @@ export class VisitaPage {
     this.navCtrl.push(GestionvisitasPage);
   }
 
+  facturar() {
+    this.navCtrl.push(NuevopedidoPage,{clienteid:this.id,clientenombre:this.nombre});
+
+  }
+
+
 
 /*muestra los errores */
 MostarToast(MensajeError:any){
@@ -95,7 +103,10 @@ MostarToast(MensajeError:any){
                         this.MostarToast(error);
                   }else{
                       if(this.nofactura == "si"){ //si facturara
-                          this. igularcampos()
+                          let fact = 1
+                          this. igularcampos(fact);
+                          
+
                       }else{ //no facturara
                            if(!this.Razonnofactura){
                             let error = "Para continuar. Seleccione el motivo  por el cual no tomara pedido";
@@ -117,7 +128,9 @@ MostarToast(MensajeError:any){
   }
 
 
-  igularcampos(){
+  igularcampos(fact:any = 0){
+
+
     this.storageCrtl.ready().then(()=>{
       this.storageCrtl.get("visitas").then(data =>{
         data[this.numero -1 ]["longitud"] = this.Long;
@@ -147,19 +160,42 @@ MostarToast(MensajeError:any){
 
             this.storageCrtl.set("visitas",data)
 
-            let alert = this.alertCtrl.create({
-              title:"Correcto",
-              subTitle:"Encuesta Guardada exitosamente",
-              buttons:[{
-                text :'OK',
-                role: 'OK',
-                handler: () => {
-                  this.cancelar()
-                }
-              }
-            ]
-            });
-              alert.present();
+if(fact == 1){
+  let alert = this.alertCtrl.create({
+    title: "Correcto",
+    subTitle: "Visita Guardada exitosamente",
+    buttons: [{
+      text: 'OK',
+      role: 'OK',
+      handler: () => {
+        this.facturar()
+      }
+    }
+    ]
+  });
+  alert.present();
+
+
+}else{
+
+  let alert = this.alertCtrl.create({
+    title: "Correcto",
+    subTitle: "Visita Guardada exitosamente",
+    buttons: [{
+      text: 'OK',
+      role: 'OK',
+      handler: () => {
+        this.cancelar()
+      }
+    }
+    ]
+  });
+  alert.present();
+
+}
+
+
+         
             
       });
 });

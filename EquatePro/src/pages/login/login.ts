@@ -225,7 +225,11 @@ export class LoginPage {
                         facturo: "",
                         altitud:"",
                         longitud:"",
-                        notas:""
+                        notas:"",
+                        creadoPor:"mobil",
+                        creadoFecha: new Date().toISOString().slice(0, 10),
+                        modificadoPor:"mobil",
+                        modificadoFecha: new Date().toISOString().slice(0, 10)
                   };
                   this.visitas.push(visita)
               }
