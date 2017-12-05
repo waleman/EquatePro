@@ -18,8 +18,89 @@
         <ion-item><ion-label color="primary">Cliente : </ion-label></ion-item>
         <ion-item > {{ id }} - {{ nombre }}</ion-item>
     </ion-card>
+
+    <ion-card>
+      <ion-item >    
+        <ion-icon name="cart"  item-start></ion-icon>
+       <h2>Seleccionar Producto</h2>
+    
+       
+               <ion-icon color="primary" item-end name="arrow-forward"></ion-icon>
+    
+      </ion-item>
+   </ion-card>
   </ion-list>
 
- 
+  <ion-content>
+    <ion-item-group >
+      <ion-item-divider >
+          <ion-label color="primary"> Lista de productos seleccinados</ion-label>
+       
+      </ion-item-divider>
+      <ion-card>
+          <ion-card-header>
+              Papel Higienico Scott
+            </ion-card-header>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label color="Gris2" item-start class="subtotales">Detalle-unudad x2 </ion-label>
+                    <ion-label color="Gris2" item-end class="totales subtotales">0.00 HNL </ion-label>
+                </ion-item>          
+            </ion-card-content>
+      </ion-card>
+      <ion-card>
+          <ion-card-header>
+              Papel Higienico Scott
+            </ion-card-header>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label color="Gris2" item-start class="subtotales">Detalle-unudad x2 </ion-label>
+                    <ion-label color="Gris2" item-end class="totales subtotales">0.00 HNL </ion-label>
+                </ion-item>          
+            </ion-card-content>
+      </ion-card>
+      
+      <ion-card>
+          <ion-card-header>
+              Papel Higienico Scott
+            </ion-card-header>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label color="Gris2" item-start class="subtotales">Detalle-unudad x2 </ion-label>
+                    <ion-label color="Gris2" item-end class="totales subtotales">0.00 HNL </ion-label>
+                </ion-item>          
+            </ion-card-content>
+      </ion-card>
+     
+    </ion-item-group>
+  </ion-content>
+
+  <ion-list inset color="Gris" class="listatotales">
+    <ion-item color="Gris"  >    
+      <ion-label color="dark" item-start class="subtotales">SubTotal : </ion-label>
+      <ion-label color="dark" item-end class="totales subtotales">0.00 HNL </ion-label>
+    </ion-item>
+    <ion-item color="Gris"  >    
+      <ion-label color="dark" item-start class="subtotales">Descuento : </ion-label>
+      <ion-label color="dark" item-end class="totales subtotales">0.00 HNL </ion-label>
+    </ion-item>
+    <ion-item color="Gris"  >    
+      <ion-label color="dark" item-start class="subtotales">Neto : </ion-label>
+      <ion-label color="dark" item-end class="totales subtotales">0.00 HNL </ion-label>
+    </ion-item>
+    <ion-item  color="Gris" >    
+      <ion-label color="dark" item-start class="subtotales">Impuesto : </ion-label>
+      <ion-label color="dark" item-end class="totales subtotales">0.00 HNL </ion-label>
+    </ion-item>
+   
+  </ion-list>
 
 </ion-content>
+
+
+<ion-footer >
+  <ion-item  color="dark"  >    
+    <ion-label item-start>Total : </ion-label>
+    <ion-label item-end class="totales">1600.00 HNL </ion-label>
+  </ion-item>
+</ion-footer>
