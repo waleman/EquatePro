@@ -175,6 +175,10 @@ export class LoginPage {
                    this.recolectarRazonesNoFactura();
                    /* llamamos las funcion para recolectar los  clientes */
                    this.RecolectarClientes(data.vendedorId);
+                  /* llamamos la funcion para recolectar los productos */
+                  this.recolectarProductoVenta(data.vendedorId)
+                  /* llamamos la funcion para recolectar los precios */
+                  this.recolectarPrecios(data.vendedorId)
 
                 }else{
                   let err = "No tiene permisos para acceder";
@@ -210,7 +214,7 @@ export class LoginPage {
             let err = "Error en descargar clientes. Consulte con el administrador del sistema";
             this.MostarToast(err);
           }else{
-            this.storageCrtl.set("clientes",data)
+           // this.storageCrtl.set("clientes",data)
             for( let lista of data){
 
               /*crear las visitas para cada uno de los clientes */
@@ -275,6 +279,48 @@ recolectarRazonesNoVisita(){
 }
 
 
+/*recolectar todos los productos que seran vendidos */
+  recolectarProductoVenta(idVendedor){
+  let direccion = this._conexion.Url + "vendedor/" + idVendedor + "/productos/venta"
+  this.http.get(direccion)
+    .map(res => res.json())
+    .subscribe(data => {
+      if (!data) {
+        let err = "Error en descargar los productos . Consulte con el administrador del sistema";
+        this.MostarToast(err);
+      } else {
+        this.storageCrtl.set("productosVenta", data)
+
+      }
+    })
+
+}
+
+/*recolectar todos los precios de los productos */
+  recolectarPrecios(idVendedor) {
+    let direccion = this._conexion.Url + "vendedor/" + idVendedor + "/precios/activos"
+    this.http.get(direccion)
+      .map(res => res.json())
+      .subscribe(data => {
+        if (!data) {
+          let err = "Error en descargar los precios . Consulte con el administrador del sistema";
+          this.MostarToast(err);
+        } else {
+          //---------------------------------------------------modificar cuando este terminado el web service
+          let valores = [];
+          for (let item of data){
+             if(item["tipoPrecio"] == "Detalle"){
+               valores.push(item)
+               console.log(item)
+             }
+          }
+
+          this.storageCrtl.set("precios", valores)
+
+        }
+      })
+
+  }
 
 
 

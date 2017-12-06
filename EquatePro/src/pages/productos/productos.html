@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar color="primary" hideBackButton>.
+    <ion-title text-center>
+      Seleccione el producto
+    </ion-title>
+    <ion-searchbar (ionInput)="getItems($event)" placeholder="Buscar un producto" showCancelButton="true" animated="true">
+    </ion-searchbar>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+
+
+      <ion-list [virtualScroll]="listamostrar">
+        <ion-item  *virtualItem="let item" (click)="Facturar(item)">
+          <h2>  {{ item.producto }} </h2>
+            <div>
+              <p class="izquierda">{{item.codigo}} </p>
+              <p class="derecha">{{ item.precioCosto}} HNL</p>
+            </div>
+        </ion-item>
+      </ion-list>
+
+
+    <!--     
+      <ion-list>
+          <div name="listavisitas" *ngFor="let visitas of lista ;" >
+                  <ion-item  *ngIf="visitas.estado == 'Visitado'" >
+                  
+                  <h2>{{ visitas.nombre }} </h2>
+                  <p>Codigo de cliente : {{visitas.clienteId}} </p>
+                  <ion-badge item-end color="secondary">{{visitas.estado}}</ion-badge>
+              
+                  </ion-item> 
+          </div>
+      </ion-list>
+  -->
+  
+    <!-- <ion-list [virtualScroll]="lista">
+      <button ion-item name="listavisitas" *virtualItem="let visitas; let i = index;" [hidden]="visitas.estado != 'Visitado'">
+        <h2>{{ i+1 }} - {{ visitas.nombre }} </h2>
+        <p>Codigo de cliente : {{visitas.clienteId}} </p>
+  
+        <ion-icon color="secondary" name="done-all" item-end></ion-icon>
+  
+      </button>
+    </ion-list> -->
+  
+
+  
+
+</ion-content>

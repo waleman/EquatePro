@@ -22,8 +22,10 @@ import { VisitaPage } from '../pages/visita/visita';
 import { NuevopedidoPage } from '../pages/nuevopedido/nuevopedido';
 
 //modals
-import { ModalRazonesNofacturaPage } from '../pages/modal-razones-nofactura/modal-razones-nofactura'
-import { ModalRazonesNovisitaPage } from '../pages/modal-razones-novisita/modal-razones-novisita'
+import { ModalRazonesNofacturaPage } from '../pages/modal-razones-nofactura/modal-razones-nofactura';
+import { ModalRazonesNovisitaPage } from '../pages/modal-razones-novisita/modal-razones-novisita';
+import { ProductosPage } from '../pages/productos/productos';
+import { ProfuctosFacturarPage } from '../pages/profuctos-facturar/profuctos-facturar';
 //providers
 import { ConexionProvider } from '../providers/conexion/conexion';
 import { UtilidadesProvider } from '../providers/utilidades/utilidades';
@@ -44,7 +46,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     ClientespospuestosPage,
     GestionvisitasPage,
     VisitaPage, ModalRazonesNofacturaPage, ModalRazonesNovisitaPage,
-    NuevopedidoPage
+    NuevopedidoPage, ProductosPage,ProfuctosFacturarPage
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     ClientespospuestosPage,
     GestionvisitasPage,
     VisitaPage, ModalRazonesNovisitaPage, ModalRazonesNofacturaPage,
-    NuevopedidoPage
+    NuevopedidoPage, ProductosPage, ProfuctosFacturarPage
   ],
   providers: [
     StatusBar,
