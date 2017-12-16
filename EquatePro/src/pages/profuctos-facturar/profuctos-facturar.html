@@ -13,50 +13,48 @@
 <ion-content >
 
 
-  <ion-list >
 
     <ion-card>
-
-      <ion-item color="light">
-        <ion-label  item-start class="subtotales">Codigo</ion-label>
-        <ion-label  item-end class="totales subtotales">{{ _id}} </ion-label>
-      </ion-item>
-      <ion-item color="light">
-        <ion-label  class="">Producto</ion-label>
-        <ion-label  class="subtotales">{{_producto}}</ion-label>
-      </ion-item>
-        <ion-item color="light">
-          <ion-label item-start class="subtotales">Tipo precio</ion-label>
-          <ion-label item-end class="totales subtotales">Detalle</ion-label>
-        </ion-item>
-    
+          <ion-item color="light">
+            <ion-label  item-start class="subtotales">Codigo:</ion-label>
+            <ion-label   class=" subtotales">{{ _id}} </ion-label>
+          </ion-item>
+          <ion-item color="light">
+            <ion-label  class="">Producto:</ion-label>
+            <ion-label style="white-space:unset;"  class="subtotales">{{_producto}}</ion-label>
+          </ion-item>
     </ion-card>
     
 
-    <ion-card>
-      <ion-item>
-        <ion-label fixed>Medida</ion-label>
-        <ion-input type="text" value="Unidad" readonly></ion-input>
-      </ion-item>
-      </ion-card>
-
 
         <ion-card>
+                  <ion-item>
+                    <ion-label>Tipo precio</ion-label>
+                    <ion-select (ionChange)="SeleccionarPrecio()" [(ngModel)]="tipoprecio">
+                      <ion-option *ngFor="let item of ListaPrecios" value="{{item.precioId}}">{{item.tipoPrecio}} - {{item.medida}}</ion-option>
+                    </ion-select>
+                  </ion-item>
                 <ion-item>
                   <ion-label fixed>Precio</ion-label>
-                  <ion-input type="text" value="22.00" readonly></ion-input>
+                  <ion-input type="text"  [(ngModel)]="precio" readonly></ion-input>
                 </ion-item>
               
               <ion-item>
                 <ion-label color="dark" fixed>Cantidad</ion-label>
-                <ion-input color="dark" max="_cantidad" type="number" name="cantidad" [(ngModel)]="cantidad" ></ion-input>
+                <ion-input color="dark"  (input)="Calcular()" type="number" name="cantidad" [(ngModel)]="cantidad" ></ion-input>
               </ion-item>
             
         </ion-card>
       
-  </ion-list>
 
 
+<ion-card>
+
+  <button ion-button full padding>Guardar</button>
+  <br>
+  <button ion-button full padding color="danger" (click)="ocultar()">Cancelar</button>
+</ion-card>
+ 
 
 </ion-content>
 
@@ -65,22 +63,22 @@
 
 <ion-item color="Gris">
   <ion-label color="dark" item-start class="subtotales">SubTotal : </ion-label>
-  <ion-label color="dark" item-end class="totales subtotales">0.00 HNL </ion-label>
+  <ion-label color="dark" item-end class="totales subtotales">{{subtotal}}</ion-label>
 </ion-item>
 <ion-item color="Gris">
   <ion-label color="dark" item-start class="subtotales">Descuento : </ion-label>
-  <ion-label color="dark" item-end class="totales subtotales">0.00 HNL </ion-label>
+  <ion-label color="dark" item-end class="totales subtotales">{{descuento}}</ion-label>
 </ion-item>
 <ion-item color="Gris">
   <ion-label color="dark" item-start class="subtotales">Neto : </ion-label>
-  <ion-label color="dark" item-end class="totales subtotales">0.00 HNL </ion-label>
+  <ion-label color="dark" item-end class="totales subtotales">{{neto}} </ion-label>
 </ion-item>
 <ion-item color="Gris">
   <ion-label color="dark" item-start class="subtotales">Impuesto : </ion-label>
-  <ion-label color="dark" item-end class="totales subtotales">0.00 HNL </ion-label>
+  <ion-label color="dark" item-end class="totales subtotales">{{impuesto}} </ion-label>
 </ion-item>
   <ion-item color="dark">
     <ion-label item-start>Total : </ion-label>
-    <ion-label item-end class="totales">1600.00 HNL </ion-label>
+    <ion-label item-end class="totales">{{total}} </ion-label>
   </ion-item>
 </ion-footer>
