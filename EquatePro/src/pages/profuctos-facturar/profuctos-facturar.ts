@@ -5,6 +5,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { NgProbeToken } from '@angular/core/src/application_ref';
 import { ViewController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 
 
@@ -36,12 +37,27 @@ export class ProfuctosFacturarPage {
   public tipoprecio :any ;
   public unidades:any;
   public precio:any='0.00';
+  public precioId:any;
+
+  public pedido = {
+      producto:"",
+      productoid:"",
+      precioid:"",
+      tipoprecio:"",
+      precio:0,
+      cantidad:0,
+      subtotal:0,
+      descuento:0,
+      neto:0,
+      impuesto:0,
+      total:0
+  };
 
 
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storageCrtl: Storage, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storageCrtl: Storage, public viewCtrl: ViewController, public toastCtrl: ToastController) {
     this.datos = this.navParams.get('datos')
     this._id = this.datos['productoId'];
     this._codigo = this.datos['codigo'];
@@ -57,7 +73,6 @@ export class ProfuctosFacturarPage {
   ionViewDidLoad() {
     
   }
-
 RecolectarPrecios(productoCodigo,tipoprecio){
 
   this.storageCrtl.ready().then(() => {
@@ -74,13 +89,12 @@ RecolectarPrecios(productoCodigo,tipoprecio){
 
 
 SeleccionarPrecio(){
-
-
   for(let val of this.ListaPrecios){
     if (val["precioId"] == this.tipoprecio ){
         this.precio = val.precio;
-      this.precio = this.formatNum(this.precio);
+        this.precio = this.formatNum(this.precio);
         this.unidades = val.unidades
+        this.precioId = val.precioId;
       this.Calcular()
     }
   }
@@ -88,8 +102,16 @@ SeleccionarPrecio(){
 } 
 
 
+VerificarCantidades(){
+
+  this.Calcular();
+}
+
 
 Calcular(){
+  this.cantidad = this.Nodecimales(this.cantidad);
+
+
   this.subtotal = this.precio * this.cantidad;
   this.subtotal = this.formatNum(this.subtotal);
   this.neto = this.subtotal - this.descuento;
@@ -110,13 +132,73 @@ Calcular(){
   return dec == val.length - 3 || dec == 0 ? val : val.substring(0, dec + 3);
 }
 
+  Nodecimales(val) {
+    val = Math.round(val);
+    return val;
+  }
+
 
   ocultar(){
     this.viewCtrl.dismiss();
   }
 
 
+  /*muestra los errores */
+  MostarToast(MensajeError: any) {
+    let toast = this.toastCtrl.create({
+      message: MensajeError,
+      duration: 3000,
+      showCloseButton: true,
+      closeButtonText: "x"
+    });
+    toast.present();
+  }
 
+
+  Tomarpedido(){
+
+    if (!this.tipoprecio) {
+          let err = "Debe seleccionar un tipo de precio para continuar."
+          this.MostarToast(err);          
+        }else{
+                if (this.cantidad > this._cantidad) {
+                  this.cantidad = this._cantidad;
+                  let err = "La cantidad seleccionada supera el inventario. el valor se corregira automaticamente"
+                  this.MostarToast(err);
+                }
+
+                if (this.cantidad <= 0) {
+                  this.cantidad = 1;
+                  let err = "La cantidad seleccionada debe ser mayor a 0. el valor se corregira automaticamente"
+                  this.MostarToast(err);
+                }
+
+
+               this.pedido.cantidad = this.cantidad;
+               this.pedido.producto = this._producto;
+               this.pedido.productoid = this._id;
+               this.pedido.precioid = this.precioId;
+               this.tipoprecio =this.tipoprecio 
+               this.pedido.precio = this.precio;
+               this.pedido.precioid = this.precioId;
+               this.pedido.subtotal = this.subtotal;
+               this.pedido.descuento = this.descuento;
+               this.pedido.neto = this.neto;
+               this.pedido.impuesto = this.impuesto;
+               this.pedido.total = this.total;
+
+               this.viewCtrl.dismiss(this.pedido);
+
+
+
+
+
+        }
+
+
+
+
+  }
 
 
 

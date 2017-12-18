@@ -31,56 +31,59 @@
    </ion-card>
   </ion-list>
 
+  <button ion-button full padding>Guardar</button>
+  <button ion-button full padding color="danger" >Cancelar</button>
+  <br>
+
   <ion-content>
     <ion-item-group >
       <ion-item-divider >
           <ion-label color="primary"> Lista de productos seleccinados</ion-label>
        
       </ion-item-divider>
-      <ion-card>
-          <ion-card-header>
-              Papel Higienico Scott
-            </ion-card-header>
-            <ion-card-content>
-                <ion-item>
-                    <ion-label color="Gris2" item-start class="subtotales">Detalle-unudad x2 </ion-label>
-                    <ion-label color="Gris2" item-end class="totales subtotales">0.00 HNL </ion-label>
-                </ion-item>          
-            </ion-card-content>
-      </ion-card>
- 
-      
-  
+
+     
+
+      <ion-list >
+        <ion-item  *ngFor ="let item of pedido" >
+          <h2> {{ item.producto }} </h2>
+          <div>
+            <p class="izquierda">cantidad:{{item.cantidad}} </p>
+            <p class="derecha">{{item.total}} HNL</p>
+          </div>
+        </ion-item>
+      </ion-list> 
      
     </ion-item-group>
   </ion-content>
 
-  <ion-list inset color="Gris" class="listatotales">
-    <ion-item color="Gris"  >    
-      <ion-label color="dark" item-start class="subtotales">SubTotal : </ion-label>
-      <ion-label color="dark" item-end class="totales subtotales">0.00 HNL </ion-label>
-    </ion-item>
-    <ion-item color="Gris"  >    
-      <ion-label color="dark" item-start class="subtotales">Descuento : </ion-label>
-      <ion-label color="dark" item-end class="totales subtotales">0.00 HNL </ion-label>
-    </ion-item>
-    <ion-item color="Gris"  >    
-      <ion-label color="dark" item-start class="subtotales">Neto : </ion-label>
-      <ion-label color="dark" item-end class="totales subtotales">0.00 HNL </ion-label>
-    </ion-item>
-    <ion-item  color="Gris" >    
-      <ion-label color="dark" item-start class="subtotales">Impuesto : </ion-label>
-      <ion-label color="dark" item-end class="totales subtotales">0.00 HNL </ion-label>
-    </ion-item>
    
-  </ion-list>
 
 </ion-content>
 
 
 <ion-footer >
+  <ion-list inset color="Gris" class="listatotales">
+    <ion-item color="Gris">
+      <ion-label color="dark" item-start class="subtotales">SubTotal : </ion-label>
+      <ion-label color="dark" item-end class="totales subtotales">{{subtotal}} HNL </ion-label>
+    </ion-item>
+    <ion-item color="Gris">
+      <ion-label color="dark" item-start class="subtotales">Descuento : </ion-label>
+      <ion-label color="dark" item-end class="totales subtotales">{{descuento}} HNL </ion-label>
+    </ion-item>
+    <ion-item color="Gris">
+      <ion-label color="dark" item-start class="subtotales">Neto : </ion-label>
+      <ion-label color="dark" item-end class="totales subtotales">{{neto}} HNL </ion-label>
+    </ion-item>
+    <ion-item color="Gris">
+      <ion-label color="dark" item-start class="subtotales">Impuesto : </ion-label>
+      <ion-label color="dark" item-end class="totales subtotales">{{impuesto}} HNL </ion-label>
+    </ion-item>
+  
+  </ion-list>
   <ion-item  color="dark"  >    
     <ion-label item-start>Total : </ion-label>
-    <ion-label item-end class="totales">1600.00 HNL </ion-label>
+    <ion-label item-end class="totales">{{total}} HNL </ion-label>
   </ion-item>
 </ion-footer>

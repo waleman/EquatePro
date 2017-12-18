@@ -41,7 +41,7 @@
               
               <ion-item>
                 <ion-label color="dark" fixed>Cantidad</ion-label>
-                <ion-input color="dark"  (input)="Calcular()" type="number" name="cantidad" [(ngModel)]="cantidad" ></ion-input>
+                <ion-input color="dark"  (input)="VerificarCantidades()" type="number" name="cantidad" [(ngModel)]="cantidad" ></ion-input>
               </ion-item>
             
         </ion-card>
@@ -50,7 +50,7 @@
 
 <ion-card>
 
-  <button ion-button full padding>Guardar</button>
+  <button ion-button full padding (click)="Tomarpedido()">Guardar</button>
   <br>
   <button ion-button full padding color="danger" (click)="ocultar()">Cancelar</button>
 </ion-card>
