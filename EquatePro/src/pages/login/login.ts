@@ -311,7 +311,7 @@ recolectarRazonesNoVisita(){
           for (let item of data){
              if(item["tipoPrecio"] == "Detalle"){
                valores.push(item)
-               console.log(item)
+             
              }
           }
 

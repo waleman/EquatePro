@@ -5,6 +5,7 @@ import { Http } from '@angular/http';
 
 import { LoginPage } from '../login/login';
 import { SincronizarPage } from '../sincronizar/sincronizar';
+import { ListapedidosPage } from '../listapedidos/listapedidos';
 
 import { MenuvisitasPage } from '../menuvisitas/menuvisitas';
 //providers
@@ -39,11 +40,11 @@ export class HomePage {
     this.navCtrl.push(MenuvisitasPage);
   }
 
-/*
+
   irPedidos(){
-       this.navCtrl.push(PedidosPage);
+    this.navCtrl.push(ListapedidosPage);
   }
-*/
+
 
   Salir(){
       this.navCtrl.push(LoginPage);
@@ -54,9 +55,7 @@ export class HomePage {
   }
 
 
-  irPedidos(){
-    
-  }
+
 
 
 

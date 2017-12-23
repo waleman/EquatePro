@@ -20,22 +20,22 @@
       <p class="dia unrenglon">{{ dia }}</p>
   </div>
  <ion-card>
-<ion-item (click)="irMenuVisitas()">
-          <ion-icon name="walk"  item-start></ion-icon>
-          <h2>Visitas </h2>
-          <p>Ir al menu de visitas</p>
-          <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+         <ion-item (click)="irMenuVisitas()">
+                    <ion-icon name="walk"  item-start></ion-icon>
+                    <h2>Crear Pedidos </h2>
+                    <p>Ir al menu de visitas</p>
+                    <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
          </ion-item>
  </ion-card>
  <ion-card>
   
-        <ion-item >    
-         <ion-icon name="cart"  item-start></ion-icon>
-        <h2>Pedidos</h2>
-        <p>Ver pedidos realizados</p>
-        
+        <ion-item (click)="irPedidos()" >    
+                <ion-icon name="cart"  item-start></ion-icon>
+                <h2>Lista de Pedidos</h2>
+                <p>Ver pedidos realizados</p>
+                
                 <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
-     
+
        </ion-item>
  </ion-card>
 <ion-card>

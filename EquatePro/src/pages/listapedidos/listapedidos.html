@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar color="primary" hideBackButton>.
+    <ion-title text-center>
+      Lista de pedido realizados
+    </ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label color="primary"> Pedidos</ion-label>
+    
+      </ion-item-divider>
+    
+    
+    
+      <ion-list>
+        <ion-item *ngFor="let items of listaPedidos" >
+          <h2> {{ items.nombre }}</h2>
+          <div>
+            <p class="izquierda">Total</p>
+            <p class="derecha">{{items.total}} HNL</p>
+          </div>
+        </ion-item>
+      </ion-list>
+    
+    </ion-item-group>
+
+</ion-content>
+
+
+<ion-fab bottom left padding padding>
+  <button ion-fab color="danger" (click)="IrMenu()">
+    <ion-icon name="arrow-back"></ion-icon>
+  </button>
+</ion-fab>

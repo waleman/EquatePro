@@ -20,6 +20,7 @@ import { ClientespospuestosPage } from '../pages/clientespospuestos/clientesposp
 import { MenuvisitasPage } from '../pages/menuvisitas/menuvisitas';
 import { VisitaPage } from '../pages/visita/visita';
 import { NuevopedidoPage } from '../pages/nuevopedido/nuevopedido';
+import { ListapedidosPage } from '../pages/listapedidos/listapedidos';
 
 //modals
 import { ModalRazonesNofacturaPage } from '../pages/modal-razones-nofactura/modal-razones-nofactura';
@@ -46,7 +47,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     ClientespospuestosPage,
     GestionvisitasPage,
     VisitaPage, ModalRazonesNofacturaPage, ModalRazonesNovisitaPage,
-    NuevopedidoPage, ProductosPage,ProfuctosFacturarPage
+    NuevopedidoPage, ProductosPage, ProfuctosFacturarPage, ListapedidosPage
   ],
   imports: [
     BrowserModule,
@@ -67,7 +68,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     ClientespospuestosPage,
     GestionvisitasPage,
     VisitaPage, ModalRazonesNovisitaPage, ModalRazonesNofacturaPage,
-    NuevopedidoPage, ProductosPage, ProfuctosFacturarPage
+    NuevopedidoPage, ProductosPage, ProfuctosFacturarPage, ListapedidosPage
   ],
   providers: [
     StatusBar,
