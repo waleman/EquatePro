@@ -20,7 +20,21 @@
     </ion-card-header>
   
     <ion-card-content>
-      <button ion-button full (click)="SincronizarVisitas()">Sincronizar visitas</button>
+      <ion-list>
+        <ion-item >
+          <div>
+            <h2 class="izquierda"> Total de pedidos tomados :</h2>
+            <p class="derecha">0</p>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div>
+            <h2 class="izquierda"> Total clientes visitados :</h2>
+            <p class="derecha">0 de 52</p>
+          </div>
+        </ion-item>
+      </ion-list>
+      <button ion-button full (click)="SincronizarVisitas()">Sincronizar Pedidos</button>
     </ion-card-content>
   
   </ion-card>

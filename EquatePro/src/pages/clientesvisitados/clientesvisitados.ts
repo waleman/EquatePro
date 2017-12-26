@@ -15,6 +15,7 @@ import { ToastController } from 'ionic-angular';
 export class ClientesvisitadosPage {
 
   public lista:any;
+  public visitados =[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public storageCrtl:Storage,public menuCtrl: MenuController,public toastCtrl:ToastController) {
     this.VerlistadeClientes();
@@ -39,9 +40,17 @@ export class ClientesvisitadosPage {
       this.storageCrtl.get("visitas").then(data=>{
         if(data){
                   this.lista = data;
+                  let visitados =[];
+                  for (let items of  data){
+                    
+                    if (items['estado'] == 'Visitado'){
+                      visitados.push(items);
+                    }
+                  }
+               this.visitados = visitados;
 
                 }else{
-                  let error = "Error! no hay clientes descargados ";
+                  let error = "Error! no hay clientes descargados. Precione el boton sincronizar ";
                   this.MostarToast(error);
                 }
       });

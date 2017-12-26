@@ -14,21 +14,21 @@
 
 
 <ion-content >
-   <!--     
+       
     <ion-list>
-        <div name="listavisitas" *ngFor="let visitas of lista ;" >
-                <ion-item  *ngIf="visitas.estado == 'Visitado'" >
+        <div name="listavisitas" *ngFor="let visitas of visitados ;" >
+                <ion-item  >
                 
                 <h2>{{ visitas.nombre }} </h2>
                 <p>Codigo de cliente : {{visitas.clienteId}} </p>
-                <ion-badge item-end color="secondary">{{visitas.estado}}</ion-badge>
-            
+                <!-- <ion-badge item-end color="secondary">{{visitas.estado}}</ion-badge> -->
+            <ion-icon color="secondary" name="done-all" item-end></ion-icon>
                 </ion-item> 
         </div>
     </ion-list>
--->
 
-    <ion-list [virtualScroll]="lista">
+
+    <!-- <ion-list [virtualScroll]="lista">
             <button ion-item  name="listavisitas"  *virtualItem="let visitas; let i = index;" [hidden]="visitas.estado != 'Visitado'">        
                             <h2>{{ i+1 }} - {{ visitas.nombre }} </h2>
                             <p>Codigo de cliente : {{visitas.clienteId}} </p>
@@ -37,7 +37,7 @@
                             
             </button>
      </ion-list>
-    
+     -->
     <br><br><br>
 
 </ion-content>

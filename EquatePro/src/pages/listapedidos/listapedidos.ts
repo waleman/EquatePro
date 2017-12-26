@@ -14,6 +14,9 @@ import { Storage } from '@ionic/storage';
 export class ListapedidosPage {
 
   public listaPedidos = [];
+  public contador:any = 0;
+  public total:any = "0.00";
+  public keys:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storageCrtl: Storage) {
     this.buscarPedidos()
@@ -29,13 +32,39 @@ export class ListapedidosPage {
 
   buscarPedidos(){
       this.storageCrtl.ready().then(()=>{
-           this.storageCrtl.get('pedidos').then(valores =>{
-                  for( let item of valores){
-                    this.listaPedidos.push(item);
-                  }
-           })
-      })
+        this.storageCrtl.keys().then(data => {
+          this.keys = data;
+          if (this.keys.includes('pedidos')) {
+
+                this.storageCrtl.get('pedidos').then(valores => {
+                    if(valores == 'none'){
+
+                    }else{
+                      let contador = 0;
+                      let total = 0 ;
+                      let valor = 0 ;
+                      for (let item of valores) {
+                        contador = contador + 1;
+                        valor = parseFloat( item['total']);
+                      total = (total*1) + valor;
+                        this.listaPedidos.push(item);
+                      }
+                      this.contador = contador;
+                      this.total = this.formatNum(total);
+                    } 
+                })
+          }
+        });   
+      });
   }
   
+
+
+  formatNum(val) {
+    val = Math.round(val * 100) / 100;
+    val = ("" + val).indexOf(".") > -1 ? val + "00" : val + ".00";
+    var dec = val.indexOf(".");
+    return dec == val.length - 3 || dec == 0 ? val : val.substring(0, dec + 3);
+  }
 
 }

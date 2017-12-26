@@ -166,14 +166,24 @@ export class NuevopedidoPage {
      this.storageCrtl.keys().then(data => {
         this.keys = data
        if (this.keys.includes('pedidos')) {
+
+         
           this.storageCrtl.get('pedidos').then(val =>{
-            let arreglo =[]
-            for (let lista of val) {
-              arreglo.push(lista);
+            let arreglo = []
+            if(val == 'none'){
+              arreglo.push(this.pedidoGuardar);
+              this.pedidosanteriores = arreglo;
+              this.storageCrtl.set('pedidos', this.pedidosanteriores);
+            }else{
+             
+              for (let lista of val) {
+                arreglo.push(lista);
+              }
+              arreglo.push(this.pedidoGuardar);
+              this.pedidosanteriores = arreglo;
+              this.storageCrtl.set('pedidos', this.pedidosanteriores);
             }
-            arreglo.push(this.pedidoGuardar);
-            this.pedidosanteriores = arreglo;
-            this.storageCrtl.set('pedidos', this.pedidosanteriores);
+           
           })
        }else{
          this.pedidosanteriores.push(this.pedidoGuardar);

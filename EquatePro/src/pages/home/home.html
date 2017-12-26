@@ -42,7 +42,7 @@
     <ion-item (click)="irSincronizar()">
         <ion-icon name="cloud" item-start></ion-icon>
         <h2>Sincronizar</h2>
-        <p>Sincronizar los datos que ah trabajado</p>
+        <p>Sincronizar los datos de pedidos</p>
 
         <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
 
@@ -51,8 +51,8 @@
  <ion-card>
         <ion-item (click)="Salir()">    
          <ion-icon name="power"  item-start></ion-icon>
-        <h2>Salir</h2>
-        <p>Salir de la aplicación</p>
+        <h2>Cambiar de usuario</h2>
+        <p>ir al login para entrar con otro usuario</p>
         
                 <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
      
@@ -70,28 +70,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-<ion-fab bottom left padding padding>
-    <button ion-fab color="secundary" (click)="irPedidos()">
-        <ion-icon name="cart"></ion-icon>
+<ion-fab bottom right padding padding >
+    <button ion-fab color="primary" (click)="DescargarDatos()">
+        <ion-icon name="cloud-download"></ion-icon>
     </button>
 </ion-fab>
-<ion-fab bottom right padding padding>
-    <button ion-fab color="dark" (click)="irSincronizar()">
-        <ion-icon name="cloud"></ion-icon>
-    </button>
-</ion-fab>
--->

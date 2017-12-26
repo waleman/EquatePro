@@ -41,7 +41,7 @@ export class LoginPage {
       this.navCtrl.push(HomePage);
  }
 
-
+/*login*/
  numero(valor:any){
     this.conta = this.conta + 1;
       if(this.conta== 1){
@@ -75,7 +75,7 @@ export class LoginPage {
     
    
  }
-
+/*login*/
  borrar(){
    if(this.conta>= 0){
     if(this.conta== 1){
@@ -104,6 +104,7 @@ export class LoginPage {
    }
  }
 
+ /*login*/
  clearAll(){
   this.conta = 0;
   document.getElementById('primero').classList.remove('active'); 

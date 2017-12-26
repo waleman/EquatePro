@@ -35,6 +35,8 @@ import { UtilidadesProvider } from '../providers/utilidades/utilidades';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Network } from '@ionic-native/network';
+
 
 @NgModule({
   declarations: [
@@ -76,7 +78,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ConexionProvider,
     UtilidadesProvider,
-    Geolocation
+    Geolocation, Network
   ]
 })
 export class AppModule {}

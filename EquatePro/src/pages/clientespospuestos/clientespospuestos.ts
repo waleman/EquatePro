@@ -13,7 +13,7 @@ import { ToastController } from 'ionic-angular';
   templateUrl: 'clientespospuestos.html',
 })
 export class ClientespospuestosPage {
-
+ public visitados=[];
   public lista:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storageCrtl:Storage,public menuCtrl: MenuController,public toastCtrl:ToastController) {
     this.VerlistadeClientes();
@@ -38,7 +38,15 @@ export class ClientespospuestosPage {
       this.storageCrtl.get("visitas").then(data=>{
         if(data){
                   this.lista = data;
+                  let visitados = [];
 
+                  for(let items of this.lista){
+                    if (items['estado']=='Revisita'){
+                        visitados.push(items);
+                    }
+
+                  }
+                    this.visitados = visitados;
                 }else{
                   let error = "Error! no hay clientes descargados ";
                   this.MostarToast(error);

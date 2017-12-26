@@ -14,29 +14,31 @@
     
     
     <ion-content >
-       <!--     
+           
         <ion-list>
-            <div name="listavisitas" *ngFor="let visitas of lista ;" >
-                    <ion-item  *ngIf="visitas.estado == 'Visitado'" >
+            <div name="listavisitas" *ngFor="let visitas of visitados ;" >
+                    <ion-item >
                     
                     <h2>{{ visitas.nombre }} </h2>
                     <p>Codigo de cliente : {{visitas.clienteId}} </p>
-                    <ion-badge item-end color="secondary">{{visitas.estado}}</ion-badge>
-                
+                    <!-- <ion-badge item-end color="secondary">{{visitas.estado}}</ion-badge> -->
+                        <ion-icon color="danger" name="remove-circle" item-end></ion-icon>
                     </ion-item> 
             </div>
         </ion-list>
-    -->
+   
+
+        <!-- si las listas se ponen lentas descomentar la parte de abajo y comentar la parte de arriba -->
     
-        <ion-list [virtualScroll]="lista">
-                <button ion-item  name="listavisitas"  *virtualItem="let visitas; let i = index;" [hidden]="visitas.estado != 'No Visita'">        
+        <!-- <ion-list [virtualScroll]="visitados">
+                <button ion-item  name="listavisitas"  *virtualItem="let visitas; let i = index;" >        
                                 <h2>{{ i+1 }} - {{ visitas.nombre }} </h2>
                                 <p>Codigo de cliente : {{visitas.clienteId}} </p>
                                 
                                 <ion-icon color="danger" name="remove-circle"  item-end></ion-icon>
                                 
                 </button>
-         </ion-list>
+         </ion-list> -->
         
         <br><br><br>
     

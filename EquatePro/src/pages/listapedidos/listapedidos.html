@@ -14,7 +14,7 @@
 
     <ion-item-group>
       <ion-item-divider>
-        <ion-label color="primary"> Pedidos</ion-label>
+        <ion-label color="primary">Cantidad de Pedidos : {{contador}}</ion-label>
     
       </ion-item-divider>
     
@@ -35,8 +35,16 @@
 </ion-content>
 
 
-<ion-fab bottom left padding padding>
+<ion-fab bottom left padding style="margin-bottom: 10%;" >
   <button ion-fab color="danger" (click)="IrMenu()">
     <ion-icon name="arrow-back"></ion-icon>
   </button>
 </ion-fab>
+
+
+<ion-footer>
+  <ion-item color="dark" style=" border-color:black;">
+    <ion-label item-start>Total : </ion-label>
+    <ion-label  item-end class="totales">{{total}} HNL </ion-label>
+  </ion-item>
+</ion-footer>
