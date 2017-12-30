@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
 
 
 //paginas
@@ -27,7 +27,8 @@ export class LoginPage {
   public conta:any;
   public keys:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public _conexion:ConexionProvider,public toastCtrl:ToastController,public http: Http,public storageCrtl:Storage,public menu: MenuController, public _utilidades:UtilidadesProvider){
+  constructor(public navCtrl: NavController, public navParams: NavParams,public _conexion:ConexionProvider,public toastCtrl:ToastController,
+    public http: Http, public storageCrtl: Storage, public menu: MenuController, public _utilidades: UtilidadesProvider, public loadingCtrl: LoadingController){
     this.checkdata();
     this.menu.swipeEnable(false);
     this.conta = 0;
@@ -99,6 +100,13 @@ export class LoginPage {
        elem.classList.remove('active');   
       }
 
+     if (this.conta == 4) {
+       this.n4 = ""
+       var elem = document.getElementById('cuarto');
+       // agregar clase  
+       elem.classList.remove('active');
+     }
+
       this.conta = this.conta - 1;
 
    }
@@ -142,53 +150,57 @@ export class LoginPage {
     this.MostarToast(err);
     this.clearAll();
   }else{
-    let numero = this.n1.concat(this.n2,this.n3,this.n4) ;
+    let loader = this.loadingCtrl.create({
+      content: "verificando datos ...",
+    });
+    loader.present();
+          let numero = this.n1.concat(this.n2,this.n3,this.n4) ;
 
-    let direccion = this._conexion.Url + "vendedor/pin/" + numero;
-      this.http.get(direccion)
-     .map(res => res.json())
-     .subscribe(data =>{
-             if(!data){
-              this.clearAll();
-              let err = "El PIN ingresado no es valido";
-              this.MostarToast(err);
-             }else{
-               /* si hay data creamos un array con la informacion  del vendedor */
-                if(data.mobilApp){
-                  this.usuarioId = data.vendedorId;
-                  let  datos ={
-                    zonaid:data.zonaId,
-                    zona:data.zona,
-                    sucursalId:data.sucursalId,
-                    sucursal:data.sucursal,
-                    nombre:data.nombre,
-                    pin:data.pin,
-                    rutaId:data.rutaId,
-                    ruta:data.ruta,
-                    almacenId:data.almacenId,
-                    almacen:data.almacen,
-                    vendedorId:data.vendedorId
-                   }
-                   this.storageCrtl.set("udata",datos)
-                   /*llammos la funcion para recolectar las razones de no visita */
-                   this. recolectarRazonesNoVisita();
-                   /* llamamos la funcion para recolectar las razones de no factura*/
-                   this.recolectarRazonesNoFactura();
-                   /* llamamos las funcion para recolectar los  clientes */
-                   this.RecolectarClientes(data.vendedorId);
-                  /* llamamos la funcion para recolectar los productos */
-                  this.recolectarProductoVenta(data.vendedorId)
-                  /* llamamos la funcion para recolectar los precios */
-                  this.recolectarPrecios(data.vendedorId)
+          let direccion = this._conexion.Url + "vendedor/pin/" + numero;
+            this.http.get(direccion)
+          .map(res => res.json())
+          .subscribe(data =>{
+                  if(!data){
+                    this.clearAll();
+                    let err = "El PIN ingresado no es valido";
+                    this.MostarToast(err);
+                  }else{
+                    /* si hay data creamos un array con la informacion  del vendedor */
+                      if(data.mobilApp){
+                        this.usuarioId = data.vendedorId;
+                        let  datos ={
+                          zonaid:data.zonaId,
+                          zona:data.zona,
+                          sucursalId:data.sucursalId,
+                          sucursal:data.sucursal,
+                          nombre:data.nombre,
+                          pin:data.pin,
+                          rutaId:data.rutaId,
+                          ruta:data.ruta,
+                          almacenId:data.almacenId,
+                          almacen:data.almacen,
+                          vendedorId:data.vendedorId
+                        }
+                        this.storageCrtl.set("udata",datos)
+                        /*llammos la funcion para recolectar las razones de no visita */
+                        this. recolectarRazonesNoVisita();
+                        /* llamamos la funcion para recolectar las razones de no factura*/
+                        this.recolectarRazonesNoFactura();
+                        /* llamamos las funcion para recolectar los  clientes */
+                        this.RecolectarClientes(data.vendedorId);
+                        /* llamamos la funcion para recolectar los productos */
+                        this.recolectarProductoVenta(data.vendedorId)
+                        /* llamamos la funcion para recolectar los precios */
+                        this.recolectarPrecios(data.vendedorId)
 
-                }else{
-                  let err = "No tiene permisos para acceder";
-                  this.MostarToast(err);
-                }
-             }
-     })
-
-  }
+                      }else{
+                        let err = "No tiene permisos para acceder";
+                        this.MostarToast(err);
+                      }
+                  }
+          })
+        loader.dismiss();
+        }
   
  }
 

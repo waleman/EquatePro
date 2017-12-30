@@ -24,7 +24,7 @@ import { Network } from '@ionic-native/network';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  public keys:any;
   public dia:any
   public cantidad:any;
   public TipoConexion:any;
@@ -35,7 +35,15 @@ export class HomePage {
     public menuCtrl: MenuController, public storageCrtl: Storage, public alertCtrl: AlertController, public loadingCtrl: LoadingController, private networkCtrl: Network) {
    this.dia = this._utilidades.BuscarDIaActual();
     this.menuCtrl.swipeEnable(true);
+    this.Datosdeusuario();
 
+  }
+
+
+  Datosdeusuario(){
+    this.storageCrtl.get('udata').then(datos => {
+      this.vendedorId = datos.vendedorId;
+    });
   }
 
 
@@ -51,7 +59,8 @@ export class HomePage {
 
 
   irPedidos(){
-    this.navCtrl.push(ListapedidosPage);
+    this.VerificarSiHayVisitas()
+   
   }
 
 
@@ -76,6 +85,9 @@ export class HomePage {
     alert.present();
      
   }
+
+
+
  /*borrar todo en storage*/
   deleteallData(){
     let loader = this.loadingCtrl.create({
@@ -280,7 +292,6 @@ export class HomePage {
 
             }
           }
-
           this.storageCrtl.set("precios", valores)
 
         }
@@ -298,6 +309,28 @@ export class HomePage {
       closeButtonText: "x"
     });
     toast.present();
+  }
+
+
+
+  VerificarSiHayVisitas(){
+    let valor;
+    this.storageCrtl.ready().then(()=>{
+            this.storageCrtl.keys().then( llaves =>{
+                    this.keys = llaves;
+                   if (this.keys.includes('visitas')){
+                      this.navCtrl.push(ListapedidosPage); 
+                   }else{
+                        let err = "Aviso! Para continuar debe descargar los datos del dia. Precione el boton de enlace con el servidor";
+                        this.MostarToast(err);
+
+                   }
+            });
+    });
+
+
+ 
+
   }
 
 

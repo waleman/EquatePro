@@ -24,10 +24,7 @@ export class MyApp {
     this.rootPage = LoginPage;
     this.pages = [ 
       { titulo :'Menu Principal',component: HomePage , icon:'home'},
-      { titulo :'Encuestas',component: HomePage , icon:'clipboard'},
-      { titulo :'Mapeo de clientes',component: HomePage , icon:'map'},
       { titulo :'Visitas',component: MenuvisitasPage , icon:'walk'},
-     // { titulo :'Lista de pedidos',component: PedidosPage , icon:'cart'},
       { titulo :'Sincronizar',component: SincronizarPage , icon:'cloud'},
       { titulo :'Salir ',component: LoginPage , icon:'power'},
     ]

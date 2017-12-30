@@ -158,35 +158,42 @@ export class SincronizarPage {
                           }
                           this.http.post(direccion, aEnviar)
                             .subscribe(datosRespuesta => {
-                              console.log(datosRespuesta);
+                              let valor = datosRespuesta.json;
+                  
+
+                                        let direccionPedidos = this._conexion.Url + "pedidos/" + this.vendedorId + "/sincronizar";
+                                        this.StrCrl.get("pedidos").then(data => {
+                                          if (data == 'none') {
+
+                                          } else {
+                                            let aEnviar2 = {
+                                              vendedorId: this.vendedorId,
+                                              fecha: new Date().toISOString().slice(0, 10),
+                                              pedidos: data
+                                            }
+                                            this.http.post(direccionPedidos, aEnviar2)
+                                              .subscribe(datosRespuesta => {
+                                                let valor2 = datosRespuesta.json;
+                                            
+
+
+                                                      this.StrCrl.remove('pedidos');
+                                                      this.StrCrl.remove('visitas');
+                                                      this.cantidadpedidos   = '0';
+                                                      this.cantidadClientes = '0';
+                                                      this.cantidadClientesVisitados= '0';
+                                              });
+                                          }
+                                        });
+
                             });
 
                         });
 
 
-                        let direccionPedidos = this._conexion.Url + "pedidos/" + this.vendedorId + "/sincronizar";
-                        this.StrCrl.get("pedidos").then(data => {
-                            if(data == 'none'){
 
-                            }else{
-                              let aEnviar2 = {
-                                vendedorId: this.vendedorId,
-                                fecha: new Date().toISOString().slice(0, 10),
-                                pedidos: data
-                              }
-                              this.http.post(direccionPedidos, aEnviar2)
-                                .subscribe(datosRespuesta => {
-                                  console.log(datosRespuesta);
-                                });
-                            }
-                        });
               });
 
-              this.StrCrl.remove('pedidos');
-              this.StrCrl.remove('visitas');
-              this.cantidadpedidos   = '0';
-              this.cantidadClientes = '0';
-              this.cantidadClientesVisitados= '0';
 
       loader.dismiss();
 

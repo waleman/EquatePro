@@ -72,7 +72,6 @@ export class NuevopedidoPage {
 
                   modal2.onDidDismiss(data2 => {
                     this.pedido.push(data2);
-                    console.log(data2)
                     this.calcular()
                   });
            modal2.present();
@@ -160,38 +159,58 @@ export class NuevopedidoPage {
     this.pedidoGuardar.notas = this.notas ;
     this.pedidoGuardar.productos = this.pedido ;
 
+    let valor = this.pedido.length;
 
-  /*seleccionar los pedidos anteriormente guardados  */
-   this.storageCrtl.ready().then(()=>{
-     this.storageCrtl.keys().then(data => {
-        this.keys = data
-       if (this.keys.includes('pedidos')) {
+    if(valor == 0){
+      let alert = this.alertCtrl.create({
+        title: "Error",
+        subTitle: "Debe seleccionar almenos un producto para guardar el pedido",
+        buttons: [{
+          text: 'OK',
+          role: 'OK',
 
-         
-          this.storageCrtl.get('pedidos').then(val =>{
-            let arreglo = []
-            if(val == 'none'){
-              arreglo.push(this.pedidoGuardar);
-              this.pedidosanteriores = arreglo;
-              this.storageCrtl.set('pedidos', this.pedidosanteriores);
-            }else{
-             
-              for (let lista of val) {
-                arreglo.push(lista);
-              }
-              arreglo.push(this.pedidoGuardar);
-              this.pedidosanteriores = arreglo;
-              this.storageCrtl.set('pedidos', this.pedidosanteriores);
-            }
-           
-          })
-       }else{
-         this.pedidosanteriores.push(this.pedidoGuardar);
-         this.storageCrtl.set('pedidos', this.pedidosanteriores);
-       }
-       this.salir()
-     })
-   })
+        }
+        ]
+      });
+      alert.present();
+    }else{
+
+        /*seleccionar los pedidos anteriormente guardados  */
+         this.storageCrtl.ready().then(()=>{
+           this.storageCrtl.keys().then(data => {
+              this.keys = data
+             if (this.keys.includes('pedidos')) {
+
+
+                this.storageCrtl.get('pedidos').then(val =>{
+                  let arreglo = []
+                  if(val == 'none'){
+                    arreglo.push(this.pedidoGuardar);
+                    this.pedidosanteriores = arreglo;
+                    this.storageCrtl.set('pedidos', this.pedidosanteriores);
+                  }else{
+
+                    for (let lista of val) {
+                      arreglo.push(lista);
+                    }
+                    arreglo.push(this.pedidoGuardar);
+                    this.pedidosanteriores = arreglo;
+                    this.storageCrtl.set('pedidos', this.pedidosanteriores);
+                  }
+
+                })
+             }else{
+               this.pedidosanteriores.push(this.pedidoGuardar);
+               this.storageCrtl.set('pedidos', this.pedidosanteriores);
+             }
+             this.salir()
+           })
+         })
+
+      
+    }
+
+
 
 
   }
