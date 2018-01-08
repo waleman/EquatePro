@@ -1,0 +1,49 @@
+<ion-header>
+        <ion-navbar color="primary" hideBackButton>.
+            
+                      <ion-title text-center>
+                        Lista de clientes visitados
+                      </ion-title>
+                      <!-- <ion-searchbar  (ionInput)="getItems($event)"  placeholder="Buscar un cliente" showCancelButton="true" animated="true" >
+                      </ion-searchbar> -->
+        </ion-navbar>
+    
+    </ion-header>
+    
+    
+    <ion-content >
+           
+        <ion-list>
+            <div name="listavisitas" *ngFor="let visitas of visitados ;" >
+                    <ion-item >
+                    <h2>{{ visitas.nombre }} </h2>
+                    <p>Codigo de cliente : {{visitas.clienteId}} </p>
+                    <!-- <ion-badge item-end color="secondary">{{visitas.estado}}</ion-badge> -->
+                        <ion-icon color="primary" name="remove-circle" item-end></ion-icon>
+                    </ion-item> 
+            </div>
+        </ion-list>
+   
+
+        <!-- si las listas se ponen lentas descomentar la parte de abajo y comentar la parte de arriba -->
+    
+        <!-- <ion-list [virtualScroll]="visitados">
+                <button ion-item  name="listavisitas"  *virtualItem="let visitas; let i = index;" >        
+                                <h2>{{ i+1 }} - {{ visitas.nombre }} </h2>
+                                <p>Codigo de cliente : {{visitas.clienteId}} </p>
+                                
+                                <ion-icon color="danger" name="remove-circle"  item-end></ion-icon>
+                                
+                </button>
+         </ion-list> -->
+        
+        <br><br><br>
+    
+    </ion-content>
+    
+    
+    <ion-fab left bottom class="alinear">
+        <button ion-fab color="primary" (click)="Salir()">
+          <ion-icon name="arrow-back"></ion-icon></button>
+       
+      </ion-fab>

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="primary">.
+
+    <ion-title text-center>
+      Seleccione una razon
+    </ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+
+
+
+<ion-content>
+
+  <ion-list>
+    <button ion-item *ngFor="let item of ListaNoVisita" (click)="itemSelected(item.razonId,item.descripcion)">
+      {{ item.descripcion }}
+      <ion-icon color="primary" name="arrow-dropright" item-end></ion-icon>
+    </button>
+  </ion-list>
+
+</ion-content>

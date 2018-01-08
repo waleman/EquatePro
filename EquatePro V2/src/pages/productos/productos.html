@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar color="primary" hideBackButton>.
+    <ion-title text-center>
+      Seleccione el producto
+    </ion-title>
+    <ion-searchbar (ionInput)="getItems($event)" placeholder="Buscar un producto" showCancelButton="true" animated="true">
+    </ion-searchbar>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+
+
+      <ion-list [virtualScroll]="listamostrar">
+        <ion-item  *virtualItem="let item" (click)="Facturar(item)">
+          <h2>  {{ item.producto }} </h2>
+            <div>
+              <p class="izquierda"> {{item.medida}} ({{item.unidades}}) </p>
+           
+            </div>
+        </ion-item>
+      </ion-list>
+ 
+
+</ion-content>

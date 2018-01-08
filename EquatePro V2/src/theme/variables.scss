@@ -1,0 +1,70 @@
+
+$font-path: "../assets/fonts";
+
+
+
+$app-direction: ltr;
+
+
+@import "ionic.globals";
+
+
+
+$colors: (
+  primary:    #ff0505,
+  secondary:  #04B404,
+  danger:     #165dd6,
+  light:      #f4f4f4,
+  dark:       #000,
+  Amarillo:   #e6f700,
+  Orange : #FFBF00,
+  Gris : #524e4e,
+  Gris2 : #868686,
+  lightdark:#363636
+);
+
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+
+
+
+
+// App Material Design Variables
+// --------------------------------------------------
+// Material Design only Sass variables can go here
+
+
+// $searchbar-md-input-background-color:color($colors,lightdark);
+
+// App Windows Variables
+// --------------------------------------------------
+// Windows only Sass variables can go here
+
+
+
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.dark";
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/ionicons/
+
+@import "ionic.ionicons";
+
+
+// Fonts
+// --------------------------------------------------
+
+@import "roboto";
+@import "noto-sans";

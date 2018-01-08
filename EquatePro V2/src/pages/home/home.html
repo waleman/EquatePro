@@ -1,0 +1,77 @@
+   
+<ion-header>
+        <ion-navbar color="primary" hideBackButton>
+            <!--
+                <button ion-button (click)="showMenu()">
+                        <ion-icon name="menu"></ion-icon>
+               </button>  
+            -->
+                      <ion-title text-center>
+                        Menu Principal
+                      </ion-title>
+        </ion-navbar>
+
+ </ion-header>
+
+<ion-content >
+    <br>
+  <div class="center">
+      <p class=" complemento">Hoy</p>
+      <p class="dia unrenglon">{{ dia }}</p>
+  </div>
+ <ion-card>
+         <ion-item (click)="irMenuVisitas()">
+                    <ion-icon name="walk"  item-start></ion-icon>
+                    Crear Pedidos 
+                    <p>Ir al menu de visitas</p>
+                    <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+         </ion-item>
+ </ion-card>
+ <ion-card>
+  
+        <ion-item (click)="irPedidos()" >    
+                <ion-icon name="cart"  item-start></ion-icon>
+                Lista de Pedidos
+                <p>Ver pedidos realizados</p>
+                
+                <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+
+       </ion-item>
+ </ion-card>
+<ion-card>
+    <ion-item (click)="irSincronizar()">
+        <ion-icon name="cloud" item-start></ion-icon>
+        Sincronizar
+        <p>Sincronizar los datos de pedidos</p>
+
+        <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+
+    </ion-item>
+</ion-card>
+ <ion-card>
+        <ion-item (click)="Salir()">    
+         <ion-icon name="power"  item-start></ion-icon>
+        Cambiar de usuario
+        <p>ir al login para entrar con otro usuario</p>
+        
+                <ion-icon color="primary" item-end name="arrow-dropright"></ion-icon>
+     
+       </ion-item>
+ </ion-card>
+
+
+     
+  <br><br><br><br><br><br><br>
+
+
+</ion-content>
+
+
+
+
+
+<ion-fab bottom right padding padding >
+    <button ion-fab color="danger" (click)="DescargarDatos()">
+        <ion-icon name="sync"></ion-icon>
+    </button>
+</ion-fab>

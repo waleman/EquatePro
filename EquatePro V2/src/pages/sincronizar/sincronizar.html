@@ -1,0 +1,49 @@
+
+<ion-header>
+  <ion-navbar color="primary" hideBackButton>
+    <ion-title text-center>
+      Sincronizar Datos
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content >
+
+
+  <ion-card>
+  
+    
+     <div style="text-align:center">Datos generales</div> 
+    
+  
+    <ion-card-content>
+      <ion-list>
+        <ion-item >
+          <div>
+            <div color="light" class="izquierda"> Total pedidos :</div>
+            <div class="derecha">{{cantidadpedidos}}</div>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div>
+            <div class="izquierda"> Total clientes visitados :</div>
+            <div class="derecha">{{cantidadClientesVisitados}} de {{cantidadClientes}}</div>
+          </div>
+        </ion-item>
+      </ion-list>
+      <button ion-button  color="danger" full (click)="SincronizarVisitas()">Sincronizar Pedidos</button>
+    </ion-card-content>
+  
+  </ion-card>
+
+</ion-content>
+
+
+<ion-fab bottom left padding padding>
+  <button ion-fab color="primary" (click)="IrMenu()">
+    <ion-icon name="arrow-back"></ion-icon>
+  </button>
+</ion-fab>
