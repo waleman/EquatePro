@@ -173,10 +173,7 @@ export class SincronizarPage {
                                             }
                                             this.http.post(direccionPedidos, aEnviar2)
                                               .subscribe(datosRespuesta => {
-                                                let valor2 = datosRespuesta.json;
-                                            
-
-
+                                                let valor2 = datosRespuesta.json;                                     
                                                       this.StrCrl.remove('pedidos');
                                                       this.StrCrl.remove('visitas');
                                                       this.cantidadpedidos   = '0';
