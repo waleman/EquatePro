@@ -44,7 +44,12 @@ export class HomePage {
 
   Datosdeusuario(){
     this.storageCrtl.get('udata').then(datos => {
-      this.vendedorId = datos.vendedorId;
+      let vendedorId
+      for (let items of datos) {
+        vendedorId = items.vendedorId
+      }
+      this.vendedorId = vendedorId;
+
     });
   }
 

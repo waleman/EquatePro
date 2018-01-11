@@ -96,7 +96,7 @@ export class SincronizarPage {
                   vendedorId = items.vendedorId
             }
             this.vendedorId = vendedorId;
-            console.log(this.vendedorId);
+       
           });
     });
   }
