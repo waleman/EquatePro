@@ -15,15 +15,15 @@ import { ToastController } from 'ionic-angular';
   templateUrl: 'profuctos-facturar.html',
 })
 export class ProfuctosFacturarPage {
-
+ public clienteid:any;
   public datos: any;
-
   public _id: any;
   public _codigo: any;
   public _producto: any;
   public _cantidad: any;
   public _precioCosto: any;
   public _impuesto: any;
+  public _canal:any;
   public almacenid:any;
   public cantidad: number = 1;
   public impuesto: any = '0.00';
@@ -32,12 +32,24 @@ export class ProfuctosFacturarPage {
   public total: any = '0.00';
   public descuento: any = '0.00';
   public medida: any;
-
   public ListaPrecios = [];
   public tipoprecio: any;
   public unidades: any;
   public precio: any = '0.00';
   public precioId: any;
+
+  //decuento por canal
+  public porcentajeDescuento:any  = '0' ;
+  //decuento por escala
+  public porcentajeDescuentoEscala: any = '0';
+  //decuento por ventas
+  public porcentajeDescuentoVentas: any = '0';
+  public RemplazarDescuento :any;
+
+  //escalas por productos
+  public escalasProducto =[];
+  //descuentos por ventas
+  public descuentosVentas = [];
 
   public pedido = {
     productoid: "",
@@ -56,7 +68,7 @@ export class ProfuctosFacturarPage {
     total: 0,
     precioCosto: "",
     totalCosto: 0,
-    neto: 0
+    neto: 0,
 
   };
 
@@ -65,6 +77,7 @@ export class ProfuctosFacturarPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storageCrtl: Storage, public viewCtrl: ViewController, public toastCtrl: ToastController) {
+    this.clienteid = this.navParams.get('clienteid');
     this.datos = this.navParams.get('datos')
     this._id = this.datos['productoId'];
     this._codigo = this.datos['codigo'];
@@ -72,13 +85,16 @@ export class ProfuctosFacturarPage {
     this._cantidad = this.datos['inventario'];
     this._precioCosto = this.datos['precioCosto'];
     this._impuesto = this.datos['porcentajeImpuesto'];
+    this._canal = this.datos['canalId'];
     this.precio = this.datos['precio'];
     this.precioId = this.datos['precioId'];
     this.medida = this.datos['medida'];
     this.unidades = this.datos['unidades'];
+    this.porcentajeDescuento = this.datos['descuento'];
+    this.BuscarEscalasparaElProducto();
     this.VerificarCantidades();
     this.BuscarAlmacen();
-
+    this.BuscarDescuentosPorVentasDeproducto();
 
   }
 
@@ -118,13 +134,64 @@ export class ProfuctosFacturarPage {
     
   }
 
+//escalas todas las escalas
+  BuscarEscalasparaElProducto(){
+     this.storageCrtl.ready().then(()=>{
+       this.storageCrtl.get('escalasVenta').then(data =>{
+            for ( let items of data ){
+              if (items.productoId == this._id ){
+                this.escalasProducto.push(items);
+              }
+            }
+       });
+     });
+
+ 
+  }
+
+  //buscar descuentos por cantidad en las escalas
+ BuscarDescuentosPorEscala(cantidad:number){
+   for (let items of this.escalasProducto){
+     if (cantidad >= items.cantidadMin && cantidad <= items.cantidadMax ){
+       this.porcentajeDescuentoEscala = items.descuento;
+     }
+    
+   }  
+ }
+
+ // decuentos por ventas
+BuscarDescuentosPorVentasDeproducto(){
+   this.storageCrtl.ready().then(()=>{
+     this.storageCrtl.get('descuentosVenta').then(datos =>{
+          for(let items of datos){
+            if (items.clienteId == this.clienteid){
+              this.descuentosVentas.push(items);
+            }
+          }
+     });
+   });
+}
+
+  //buscar descuentos por cantidad en las escalas
+  BuscarDescuentosPorVentas() {
+    for (let items of this.descuentosVentas) {
+
+      this.porcentajeDescuentoVentas = items.descuento;
+      this.RemplazarDescuento = items.reemplazaEscala;
+
+    }
+
+  }
+
+
+
 
   Calcular() {
 
-  
     this.cantidad = this.Nodecimales(this.cantidad);
 
-
+    this.BuscarDescuentosPorEscala(this.cantidad);
+    this.BuscarDescuentosPorVentas();
     let tot = 0;
     let sub = 0;
     let des = 0;
@@ -133,22 +200,54 @@ export class ProfuctosFacturarPage {
     let precio = 0;
     let cantidad = 0;
     let porimpuesto = 0;
+    
 
-
+   //calcular subtotal
     precio = this.precio;
     cantidad = this.cantidad;
     sub = precio * cantidad
-    des = this.descuento;
-    neto = sub - des;
+   //calcular descuento
+        //decuento de canal
+          let pordescuento = 0;
+          pordescuento = this.porcentajeDescuento ;
+          let desCanal = sub * pordescuento;
+         
+         //decuento por escala 
+          if (this.RemplazarDescuento == 'true'){
+           this.porcentajeDescuentoEscala == 0;
+          }
+          let porDescuentoEscala = 0;
+          porDescuentoEscala = this.porcentajeDescuentoEscala;
+          let desEscala = sub * porDescuentoEscala;
+
+
+          //descuento por venta
+        let porDescuentoVentas = 0;
+         porDescuentoVentas = this.porcentajeDescuentoVentas;
+        let desVentas = sub * porDescuentoVentas; 
+         
+
+
+        //Total decuentos
+       let sumDescuentos = (desVentas + desEscala + desCanal);
+ 
+
+   
+    //calcular imnpuestos
+    des = sumDescuentos;
+    neto = sub - sumDescuentos;
     porimpuesto = this._impuesto;
     imp = neto * porimpuesto;
     tot = neto + imp;
 
-    this.subtotal = this.formatNum(sub);
-    this.neto = this.formatNum(neto);
-    this.impuesto = this.formatNum(imp);
-    this.total = this.formatNum(tot);
 
+
+    this.subtotal = sub;
+    this.descuento = des;
+    this.neto = neto;
+    this.impuesto = imp;
+    this.total = tot;
+ 
   }
 
 
@@ -183,6 +282,7 @@ export class ProfuctosFacturarPage {
 
 
   Tomarpedido() {
+    this.Calcular();
 
     if (!this.precio) {
       let err = "Debe seleccionar un tipo de precio para continuar."
@@ -221,10 +321,13 @@ export class ProfuctosFacturarPage {
       this.pedido.neto = this.neto;
 
 
+      let array = {
+        pedidos: this.pedido,
+        canal: this._canal
+      }
 
-      this.viewCtrl.dismiss(this.pedido);
 
-
+      this.viewCtrl.dismiss(array);
 
 
 

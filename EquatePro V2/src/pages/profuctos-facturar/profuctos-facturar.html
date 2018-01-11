@@ -62,22 +62,22 @@
 
 <ion-item color="Gris">
   <ion-label  item-start class="subtotales">SubTotal : </ion-label>
-  <ion-label  item-end class="totales subtotales">{{subtotal}} HND</ion-label>
+  <ion-label  item-end class="totales subtotales">{{ formatNum(subtotal)}} HND</ion-label>
 </ion-item>
 <ion-item color="Gris">
   <ion-label  item-start class="subtotales">Descuento : </ion-label>
-  <ion-label  item-end class="totales subtotales">{{descuento}} HND</ion-label>
+  <ion-label  item-end class="totales subtotales">{{formatNum(descuento)}} HND</ion-label>
 </ion-item>
 <ion-item color="Gris">
   <ion-label  item-start class="subtotales">Neto : </ion-label>
-  <ion-label  item-end class="totales subtotales">{{neto}} HND </ion-label>
+  <ion-label  item-end class="totales subtotales">{{formatNum(neto)}} HND </ion-label>
 </ion-item>
 <ion-item color="Gris">
   <ion-label  item-start class="subtotales">Impuesto : </ion-label>
-  <ion-label  item-end class="totales subtotales">{{impuesto}} HND </ion-label>
+  <ion-label  item-end class="totales subtotales">{{formatNum(impuesto)}} HND </ion-label>
 </ion-item>
   <ion-item >
     <ion-label item-start>Total : </ion-label>
-    <ion-label item-end class="totales">{{total}} </ion-label>
+    <ion-label item-end class="totales">{{formatNum(total)}} HND</ion-label>
   </ion-item>
 </ion-footer>

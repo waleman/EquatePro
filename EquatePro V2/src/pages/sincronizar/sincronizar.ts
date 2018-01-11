@@ -91,7 +91,12 @@ export class SincronizarPage {
   DatosdeUsuario(){
     this.StrCrl.ready().then(()=>{
           this.StrCrl.get("udata").then(data =>{
-            this.vendedorId =data["vendedorId"];
+            let vendedorId
+            for ( let items of data){
+                  vendedorId = items.vendedorId
+            }
+            this.vendedorId = vendedorId;
+            console.log(this.vendedorId);
           });
     });
   }

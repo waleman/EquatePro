@@ -19,7 +19,7 @@ import { HomePage } from '../home/home'
   templateUrl: 'nuevopedido.html',
 })
 export class NuevopedidoPage {
-
+  public canal:any;
   public id: any;
   public nombre: any;
   public listadocompras:any;
@@ -42,6 +42,7 @@ export class NuevopedidoPage {
       total:"",
       totalCosto:"",
       notas:"",
+      canalId:"",
       productos:[]
   }
 
@@ -68,10 +69,14 @@ export class NuevopedidoPage {
     let modal = this.modalCtrl.create(ProductosPage)
     modal.onDidDismiss(data => {
 
-            let modal2 = this.modalCtrl.create(ProfuctosFacturarPage,{datos:data})
+      let modal2 = this.modalCtrl.create(ProfuctosFacturarPage, { datos: data, clienteid: this.id})
 
                   modal2.onDidDismiss(data2 => {
-                    this.pedido.push(data2);
+                    console.log(data2);
+                    let canal = data2['canal'];
+                    let pedidos = data2['pedidos'];
+                    this.canal = canal;
+                    this.pedido.push(pedidos);
                     this.calcular()
                   });
            modal2.present();
@@ -158,7 +163,7 @@ export class NuevopedidoPage {
     this.pedidoGuardar.totalCosto = this.totalCosto ;
     this.pedidoGuardar.notas = this.notas ;
     this.pedidoGuardar.productos = this.pedido ;
-
+    this.pedidoGuardar.canalId = this.canal;
     let valor = this.pedido.length;
 
     if(valor == 0){
