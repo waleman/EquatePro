@@ -281,7 +281,7 @@ recolectarRazonesNoVisita(){
 
  }
 
-
+/* funcion para recolectar las razones de no factura */
  recolectarRazonesNoFactura(){
   let direccion =  this._conexion.Url + "razones/nofactura";
   this.http.get(direccion)
@@ -304,7 +304,16 @@ recolectarRazonesNoVisita(){
 /*recolectar todos los precios de los productos */
   recolectarPrecios(idVendedor) {
     let diaActual = this._utilidades.BuscarNumerodeDia();
-    let direccion = this._conexion.Url + "vendedor/" + idVendedor + "/dia/" + diaActual+ "/precios/activos";
+    /* se cambio la direccion de web service a hora se debe incluir la fecha en el formato MMddyyyy*/
+    var date = new Date();
+    var formattedDate = ('0' + date.getDate()).slice(-2);
+    var formattedMonth = ('0' + (date.getMonth() + 1)).slice(-2);
+    var formattedYear = date.getFullYear();
+
+    var dateString = formattedMonth + '' + formattedDate + '' + formattedYear;
+    //console.log(dateString);
+
+    let direccion = this._conexion.Url + "vendedor/" + idVendedor + "/dia/" + diaActual + "/precios/activos/" + dateString;
     this.http.get(direccion)
       .map(res => res.json())
       .subscribe(data => {
@@ -312,7 +321,7 @@ recolectarRazonesNoVisita(){
           let err = "Error en descargar los precios . Consulte con el administrador del sistema";
           this.MostarToast(err);
         } else {
-
+        
         
           let canalPreciosVenta_array = data['canalPreciosVenta'];
           let canalPreciosVenta = []
@@ -337,6 +346,15 @@ recolectarRazonesNoVisita(){
           this.storageCrtl.set("escalasVenta", escalasVenta);
 
 
+
+          let bonificaciones_array = data['bonificacionesVenta'];
+          let bonificaciones = [];
+
+          for (let item of bonificaciones_array) {
+            bonificaciones.push(item)
+          }
+
+          this.storageCrtl.set("bonificacionesVenta", bonificaciones);
 
         }
       })
