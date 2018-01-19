@@ -299,6 +299,19 @@ export class HomePage {
 
 
 
+          let bonificaciones_array = data['bonificacionesVenta'];
+          let bonificaciones = [];
+
+          for (let item of bonificaciones_array) {
+            bonificaciones.push(item)
+          }
+
+          this.storageCrtl.set("bonificacionesVenta", bonificaciones);
+
+        
+
+            
+
         }
       })
 

@@ -24,6 +24,7 @@ export class ProfuctosFacturarPage {
   public _precioCosto: any;
   public _impuesto: any;
   public _canal:any;
+  public _medidaId:any;
   public almacenid:any;
   public cantidad: number = 1;
   public impuesto: any = '0.00';
@@ -69,8 +70,12 @@ export class ProfuctosFacturarPage {
     precioCosto: "",
     totalCosto: 0,
     neto: 0,
-
+    medidaId:"",
+    bonificaciones:{}
   };
+
+
+  public bonificaciones=[];
 
 
 
@@ -90,6 +95,7 @@ export class ProfuctosFacturarPage {
     this.precioId = this.datos['precioId'];
     this.medida = this.datos['medida'];
     this.unidades = this.datos['unidades'];
+    this._medidaId = this.datos['medidaId']
     this.porcentajeDescuento = this.datos['descuento'];
     this.BuscarEscalasparaElProducto();
     this.VerificarCantidades();
@@ -300,7 +306,7 @@ BuscarDescuentosPorVentasDeproducto(){
         this.MostarToast(err);
       }
 
-
+      this.BuscarArrayBonificacion(this._id, this.unidades, this._medidaId, this.cantidad, this.precioId);
 
       this.pedido.productoid = this._id;
       this.pedido.producto = this._producto;
@@ -319,7 +325,8 @@ BuscarDescuentosPorVentasDeproducto(){
       this.pedido.precioCosto = this._precioCosto;
       this.pedido.totalCosto = this._precioCosto * this.cantidad;
       this.pedido.neto = this.neto;
-
+      this.pedido.medidaId = this._medidaId;
+      this.pedido.bonificaciones = this.bonificaciones;
 
       let array = {
         pedidos: this.pedido,
@@ -334,9 +341,55 @@ BuscarDescuentosPorVentasDeproducto(){
     }
 
 
-
-
   }
+
+
+
+
+  //------------------------------------
+  //buscar todas las bonificaciones
+  BuscarArrayBonificacion(_productoid: any, _unidad: any, _medidaId: any, _cantidad: any, _precioId: any) {
+    this.storageCrtl.ready().then(() => {
+      let bonificaciones_array = [];
+      this.storageCrtl.get('bonificacionesVenta').then(bonidicaciones => {
+        if (bonidicaciones) {
+          let todo = [];
+          for (let items of bonidicaciones) {
+            if (_productoid == items.productoId && items.unidades == _unidad && _medidaId == items.medidaId) {
+              let veces = _cantidad / items.cantidadRequeridaFacturar
+              let cantidadBonificar = 0;
+              //buscar las veces que sera bonificado este producto
+              if (veces >= 1) {
+                if (veces >= items.maximoVecesBonificar) {
+                  veces = items.maximoVecesBonificar;
+                }
+              } else {
+                veces = 0;
+              }
+              cantidadBonificar = veces * items.cantidadBonificar;
+
+              //crear el array con la obnificacion
+              let boni = {
+                bonificacionId: items.bonificacionId,
+                almacenId: items.almacenIdPromocional,
+                productoId: items.productoId,
+                precioid: _precioId,
+                medidaId: items.medidaId,
+                cantidad: cantidadBonificar,
+                unidades: items.unidades,
+                precioCosto: items.precioCosto,
+                totalCosto: items.precioCosto * cantidadBonificar,
+              };
+
+              this.bonificaciones.push(boni);
+
+            }
+          }
+        }
+      })
+    })
+  }
+  //-----------------------------------
 
 
 

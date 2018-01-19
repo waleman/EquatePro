@@ -51,7 +51,7 @@
           <h2> {{ item.producto }} </h2>
           <div>
             <p class="izquierda">cantidad:{{item.cantidad}} </p>
-            <p class="derecha">{{item.total}} HNL</p>
+            <p class="derecha">{{ formatNum(item.total)}} HNL</p>
           </div>
         </ion-item>
       </ion-list> 

@@ -51,6 +51,8 @@ export class NuevopedidoPage {
 
 
   public pedidosanteriores = [];
+
+
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storageCrtl: Storage, public viewCtrl: ViewController, public modalCtrl: ModalController, public alertCtrl: AlertController) {
@@ -75,6 +77,12 @@ export class NuevopedidoPage {
                     console.log(data2);
                     let canal = data2['canal'];
                     let pedidos = data2['pedidos'];
+                    let productoseleccionado_Id = pedidos['productoid'];
+                    let unidad = pedidos['unidades'];
+                    let medidaId = pedidos['medidaId'];
+                    let cantidad = pedidos['cantidad'];
+                    let precioId = pedidos['precioid'];
+                    
                     this.canal = canal;
                     this.pedido.push(pedidos);
                     this.calcular()
@@ -84,6 +92,9 @@ export class NuevopedidoPage {
 
     modal.present();
   }
+
+
+
 
 
   salir(){
